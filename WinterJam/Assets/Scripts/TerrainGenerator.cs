@@ -12,8 +12,8 @@ public class TerrainGenerator : MonoBehaviour
 
     public float xOffset = 100f;
     public float zOffset = 100f;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+
+    private void Awake()
     {
         xOffset = Random.Range(0f, 999999f);
         zOffset = Random.Range(0f, 999999f);
@@ -21,6 +21,11 @@ public class TerrainGenerator : MonoBehaviour
         GetComponent<MeshFilter>().mesh = terrain;
         GenerateTerrain();
         UpdateTerrainMesh();
+    }
+
+    void Start()
+    {
+
     }
 
     // Update is called once per frame
@@ -74,6 +79,7 @@ public class TerrainGenerator : MonoBehaviour
         terrain.vertices = vertices;
         terrain.triangles = triangles;
         terrain.RecalculateNormals();
+        gameObject.AddComponent<MeshCollider>();
     }
 
     //debug function, remove before final release
