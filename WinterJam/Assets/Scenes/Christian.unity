@@ -203,6 +203,7 @@ MonoBehaviour:
   zSize: 50
   xOffset: 100
   zOffset: 100
+  flatTerrain: 0
 --- !u!23 &1269166099
 MeshRenderer:
   m_ObjectHideFlags: 0
