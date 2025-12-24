@@ -603,6 +603,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemySpawner
       objectReference: {fileID: 0}
+    - target: {fileID: 5142890193554893907, guid: 27315bb550862ad4ea31e8ed940bcb79, type: 3}
+      propertyPath: terrainGenerator
+      value: 
+      objectReference: {fileID: 999482418}
     - target: {fileID: 7009843323572252065, guid: 27315bb550862ad4ea31e8ed940bcb79, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -643,10 +647,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8664694140345966796, guid: 27315bb550862ad4ea31e8ed940bcb79, type: 3}
-      propertyPath: terrainGenerator
-      value: 
-      objectReference: {fileID: 999482418}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
