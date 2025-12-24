@@ -9,17 +9,16 @@ public class ObjectPlacer : MonoBehaviour
     [SerializeField] int objectDensity;
 
     [SerializeField] int maxHeight;
-    [SerializeField] int minHeight;
+    [SerializeField] int xBoundOffset; //The minimum distance an object must be from the edge to spawn
+    [SerializeField] int zBoundOffset;
     int xBound;
     int zBound;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         terrainGeneratorScript = terrainGenerator.GetComponent<TerrainGenerator>();
-        xBound = terrainGeneratorScript.xSize;
-        zBound = terrainGeneratorScript.zSize;
-        Debug.Log(xBound);
-        Debug.Log(zBound);
+        xBound = terrainGeneratorScript.xSize - xBoundOffset;
+        zBound = terrainGeneratorScript.zSize - zBoundOffset;
         RandomlyPlaceObjects();
     }
 
@@ -29,8 +28,8 @@ public class ObjectPlacer : MonoBehaviour
         Vector3 objectSpawnPos;
         for (int i = 0; i < objectDensity; i++)
         {
-            float sampleX = Random.Range(0, xBound);
-            float sampleZ = Random.Range(0, zBound);
+            float sampleX = Random.Range(xBoundOffset, xBound);
+            float sampleZ = Random.Range(zBoundOffset, zBound);
             Vector3 randomPos = new Vector3(sampleX, maxHeight, sampleZ);
             Debug.Log(randomPos);
             RaycastHit hit;
