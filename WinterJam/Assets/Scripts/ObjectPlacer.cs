@@ -26,6 +26,7 @@ public class ObjectPlacer : MonoBehaviour
     void RandomlyPlaceObjects()
     {
         Vector3 objectSpawnPos;
+        int objectsSpawned = 0;
         for (int i = 0; i < objectDensity; i++)
         {
             float sampleX = Random.Range(xBoundOffset, xBound);
@@ -33,9 +34,10 @@ public class ObjectPlacer : MonoBehaviour
             Vector3 randomPos = new Vector3(sampleX, maxHeight, sampleZ);
             int objectToPlaceIndex = Random.Range(0, objectsToPlace.Length);
             RaycastHit hit;
-            if (Physics.Raycast(randomPos, Vector3.down, out hit, maxHeight + 1))
+            if (Physics.Raycast(randomPos, Vector3.down, out hit, maxHeight + 1) && hit.transform.gameObject.tag != "CantSpawnOn") //make sure all objects spawned using object spawn have this tag to avoid them spawning on each other
             {
                 objectSpawnPos = new Vector3(hit.point.x, hit.point.y + 0.8f, hit.point.z);
+                objectsSpawned++;
             }
             else
             {
@@ -43,5 +45,6 @@ public class ObjectPlacer : MonoBehaviour
             }
             Instantiate(objectsToPlace[objectToPlaceIndex], objectSpawnPos, Quaternion.identity);
         }
+        Debug.Log(objectsSpawned);
     }
 }
