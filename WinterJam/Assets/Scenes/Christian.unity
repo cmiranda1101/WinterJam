@@ -396,6 +396,14 @@ PrefabInstance:
       value: ObjectPlacer
       objectReference: {fileID: 0}
     - target: {fileID: 8806821690919901120, guid: 4894313752d0f804fa66e92ac79da45b, type: 3}
+      propertyPath: xBoundOffset
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8806821690919901120, guid: 4894313752d0f804fa66e92ac79da45b, type: 3}
+      propertyPath: zBoundOffset
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8806821690919901120, guid: 4894313752d0f804fa66e92ac79da45b, type: 3}
       propertyPath: terrainGenerator
       value: 
       objectReference: {fileID: 1269166097}

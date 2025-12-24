@@ -35,8 +35,7 @@ public class ObjectPlacer : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(randomPos, Vector3.down, out hit, maxHeight + 1))
             {
-                Debug.Log(hit.point);
-                objectSpawnPos = hit.point;
+                objectSpawnPos = new Vector3(hit.point.x, hit.point.y + 0.8f, hit.point.z);
             }
             else
             {
