@@ -5,7 +5,7 @@ public class ObjectPlacer : MonoBehaviour
     [SerializeField] GameObject terrainGenerator;
     TerrainGenerator terrainGeneratorScript;
 
-    [SerializeField] GameObject objectToPlace;
+    [SerializeField] GameObject[] objectsToPlace;
     [SerializeField] int objectDensity;
 
     [SerializeField] int maxHeight;
@@ -31,7 +31,7 @@ public class ObjectPlacer : MonoBehaviour
             float sampleX = Random.Range(xBoundOffset, xBound);
             float sampleZ = Random.Range(zBoundOffset, zBound);
             Vector3 randomPos = new Vector3(sampleX, maxHeight, sampleZ);
-            Debug.Log(randomPos);
+            int objectToPlaceIndex = Random.Range(0, objectsToPlace.Length);
             RaycastHit hit;
             if (Physics.Raycast(randomPos, Vector3.down, out hit, maxHeight + 1))
             {
@@ -41,7 +41,7 @@ public class ObjectPlacer : MonoBehaviour
             {
                 continue;
             }
-            Instantiate(objectToPlace, objectSpawnPos, Quaternion.identity);
+            Instantiate(objectsToPlace[objectToPlaceIndex], objectSpawnPos, Quaternion.identity);
         }
     }
 }
