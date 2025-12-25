@@ -1,9 +1,11 @@
+using System.Collections;
 using UnityEngine;
 
-public class ObjectPlacer : MonoBehaviour
+public class EnemyPlacer : MonoBehaviour
 {
     [SerializeField] GameObject terrainGenerator;
     TerrainGenerator terrainGeneratorScript;
+    NavMeshController navMeshController;
 
     [SerializeField] GameObject[] objectsToPlace;
     [SerializeField] int objectDensity;
@@ -13,18 +15,24 @@ public class ObjectPlacer : MonoBehaviour
     [SerializeField] int zBoundOffset;
     int xBound;
     int zBound;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    
     void Start()
     {
         terrainGeneratorScript = terrainGenerator.GetComponent<TerrainGenerator>();
+        navMeshController = terrainGenerator.GetComponent<NavMeshController>();
         xBound = terrainGeneratorScript.xSize - xBoundOffset;
         zBound = terrainGeneratorScript.zSize - zBoundOffset;
-        RandomlyPlaceObjects();
+        StartCoroutine(RandomlyPlaceEnemies());
     }
 
-
-    void RandomlyPlaceObjects()
+    // Coroutine to randomly place enemies after the NavMesh is baked
+    public IEnumerator RandomlyPlaceEnemies()
     {
+        // Wait until the NavMesh is done baking
+        while (navMeshController.isBaking)
+        {
+            yield return null;
+        }
         Vector3 objectSpawnPos;
         for (int i = 0; i < objectDensity; i++)
         {
@@ -41,7 +49,12 @@ public class ObjectPlacer : MonoBehaviour
             {
                 continue;
             }
-            Instantiate(objectsToPlace[objectToPlaceIndex], objectSpawnPos, Quaternion.identity);
+            GameObject instance = Instantiate(objectsToPlace[objectToPlaceIndex], objectSpawnPos, Quaternion.identity);
+            instance.tag = "Enemy";
+            // Set the enemy as a child of the terrain generator for organization
+            // This is also used by the enemy controller to know when the NavMesh is ready
+            instance.transform.SetParent(terrainGenerator.transform);
         }
+        yield break;
     }
 }

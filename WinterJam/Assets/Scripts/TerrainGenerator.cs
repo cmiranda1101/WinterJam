@@ -13,6 +13,8 @@ public class TerrainGenerator : MonoBehaviour
     public float xOffset = 100f;
     public float zOffset = 100f;
 
+    [SerializeField] private bool flatTerrain;
+
     private void Awake()
     {
         xOffset = Random.Range(0f, 999999f);
@@ -43,8 +45,8 @@ public class TerrainGenerator : MonoBehaviour
         {
             for (int x = 0; x <= xSize; x++)
             {
-                float y = Mathf.PerlinNoise(x * 0.25f + xOffset, z * 0.25f + zOffset) * 2;
-                vertices[i] = new Vector3(x, y, z); //if you want flat terrain swap y to 0
+                float y = flatTerrain ?  0 : (Mathf.PerlinNoise(x * 0.25f + xOffset, z * 0.25f + zOffset) * 2);
+                vertices[i] = new Vector3(x, y, z);
                 i++;
             }
         }
