@@ -1,15 +1,19 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    private PlayerControls controls;
+    [SerializeField] GameObject pauseMenu;
 
+    private PlayerControls controls;
     public GameObject player;
     public PlayerController playerScript;
-
+    public Image playerHealth;
+    public Image playerStamina;
     public bool isPaused;
 
+    
 
     private void Awake()
     {
