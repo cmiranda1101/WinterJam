@@ -14,7 +14,7 @@ public class EnemyController : MonoBehaviour
         navMeshController = GetComponentInParent<NavMeshController>();
         _ = EnableAgentWhenNavMeshReady(navMeshController);
     }
-    
+
     void Update()
     {
         if(agent != null)
@@ -50,6 +50,15 @@ public class EnemyController : MonoBehaviour
             {
                 isMoving = false;
             }
+        }
+    }
+
+    public void SetDestination(Vector3 destination)
+    {
+        NavMeshHit hit;
+        if(NavMesh.SamplePosition(destination, out hit, 1f, NavMesh.AllAreas))
+        {
+            agent.SetDestination(hit.position);
         }
     }
 }
