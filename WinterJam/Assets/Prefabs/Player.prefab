@@ -265,6 +265,9 @@ MonoBehaviour:
   turnSpeed: 15
   minPitchAngle: -20
   maxPitchAngle: 20
+  maxHealth: 10
+  healthUpdateSpeed: 10
+  health: 0
 --- !u!1 &1997948439657207740
 GameObject:
   m_ObjectHideFlags: 0

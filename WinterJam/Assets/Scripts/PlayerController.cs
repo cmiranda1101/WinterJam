@@ -1,38 +1,65 @@
+using System.Collections;
+using Unity.Collections;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IDamage
 {
     private PlayerControls controls;
     private CharacterController controller;
     private Camera playerCam;
     private float pitch;
+    private float targetHealthRatio;
 
     [SerializeField] private float moveSpeed;
     [SerializeField] private float turnSpeed;
     [SerializeField] private float minPitchAngle;
     [SerializeField] private float maxPitchAngle;
+    [SerializeField] private float maxHealth;
+    [SerializeField] private float healthUpdateSpeed;
+
+    [ReadOnly] public float health;
 
     private void Awake()
     {
-        controls = new PlayerControls();                    // Set up input system
         controller = GetComponent<CharacterController>();   // Get Character Controller
         playerCam = GetComponentInChildren<Camera>();       // Get Camera
 
         pitch = 0.0f;
     }
 
-    private void OnEnable()
+    private void Start()
     {
-        controls.Player.Enable();
+        targetHealthRatio = 1.0f;
+        health = maxHealth;
+    }
+
+    private void OnEnable() // Gaurds against Null Ref other edge cases I hit
+    {
+        if (GameManager.instance == null)
+            return;
+
+        if (controls == null)
+            controls = GameManager.instance.controls;
+
+        if (controls != null)
+            controls.Player.Enable();
     }
 
     private void OnDisable()
     {
-        controls.Player.Disable();
+        if (controls != null)   // Stops Null Ref
+            controls.Player.Disable();
     }
-
     private void Update()
     {
+        if (controls == null)   // This prevents null reference if player is compiled befor GM
+        {
+            OnDisable();
+            OnEnable();
+            return;
+        }
+
+        HandleDamage();
         movePlayer();
         Look();
     }
@@ -55,4 +82,26 @@ public class PlayerController : MonoBehaviour
         pitch = Mathf.Clamp(pitch, minPitchAngle, maxPitchAngle);
         playerCam.transform.localRotation = Quaternion.Euler(pitch, 0, 0);
     }
+
+    public void TakeDamage(int amount)
+    {
+        health -= amount;
+        health = Mathf.Clamp(health, 0, maxHealth);
+        targetHealthRatio = health / maxHealth;
+
+        if (health == 0)
+        {
+            GameManager.instance.HUD.SetActive(false);
+            controls.Player.Disable();
+        }
+    }
+
+    void HandleDamage()
+    {
+        float currRatio = GameManager.instance.playerHealth.fillAmount;
+        if (Mathf.Approximately(currRatio, targetHealthRatio)) return;
+
+        GameManager.instance.playerHealth.fillAmount = Mathf.Lerp(currRatio, targetHealthRatio, Time.deltaTime * healthUpdateSpeed);
+    }
+
 }
