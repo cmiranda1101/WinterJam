@@ -1,37 +1,19 @@
-using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AI;
+using static Unity.Behavior.Node;
 
 public class EnemyController : MonoBehaviour
 {
     NavMeshAgent agent;
-    NavMeshController navMeshController;
-
+    
     bool isMoving = false;
 
     void Start()
     {
-        navMeshController = GetComponentInParent<NavMeshController>();
-        _ = EnableAgentWhenNavMeshReady(navMeshController);
+        agent = GetComponent<NavMeshAgent>();
     }
 
-    void Update()
-    {
-        if(agent != null)
-        PatrolArea();
-    }
-
-    public async Task EnableAgentWhenNavMeshReady(NavMeshController navMeshController)
-    {
-        while (navMeshController.isBaking)
-        {
-            await Task.Yield();
-        }
-        agent = gameObject.AddComponent<NavMeshAgent>();
-        agent.enabled = true;
-    }
-
-    public void PatrolArea()
+    public Status PatrolArea()
     {
         if (!isMoving)
         {
@@ -49,8 +31,10 @@ public class EnemyController : MonoBehaviour
             if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
             {
                 isMoving = false;
+                return Status.Success;
             }
         }
+        return Status.Running;
     }
 
     public void SetDestination(Vector3 destination)
