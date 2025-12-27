@@ -11,6 +11,7 @@ public class EnemyAI : MonoBehaviour
 
     NavMeshAgent agent;
     NavMeshController navMeshController;
+    GameObject player;
 
     void Awake()
     {
@@ -23,12 +24,15 @@ public class EnemyAI : MonoBehaviour
     {
         navMeshController = GetComponentInParent<NavMeshController>();
         _ = EnableAgentWhenNavMeshReady(navMeshController);
+        
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     void Update()
     {
         
     }
+
     public async Task EnableAgentWhenNavMeshReady(NavMeshController navMeshController)
     {
         while (navMeshController.isBaking)
