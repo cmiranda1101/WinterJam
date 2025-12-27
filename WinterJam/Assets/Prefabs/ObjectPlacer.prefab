@@ -45,7 +45,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ObjectPlacer
   terrainGenerator: {fileID: 0}
-  objectToPlace: {fileID: 4978477344614403285, guid: d0b952f57ee065b439c5dd16933aae8b, type: 3}
+  objectsToPlace:
+  - {fileID: 4978477344614403285, guid: d0b952f57ee065b439c5dd16933aae8b, type: 3}
+  - {fileID: 1989982777827346957, guid: 039d3c7ac96b84b4493f48541396b2d3, type: 3}
   objectDensity: 10
   maxHeight: 20
-  minHeight: 0
+  xBoundOffset: 2
+  zBoundOffset: 2

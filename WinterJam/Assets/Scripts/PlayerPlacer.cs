@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ObjectPlacer : MonoBehaviour
+public class PlayerPlacer : MonoBehaviour
 {
     [SerializeField] GameObject terrainGenerator;
     TerrainGenerator terrainGeneratorScript;
@@ -41,9 +41,11 @@ public class ObjectPlacer : MonoBehaviour
             {
                 continue;
             }
-            GameObject instance = Instantiate(objectsToPlace[objectToPlaceIndex], objectSpawnPos, Quaternion.identity);
-            // Set the object as a child of the terrain generator for organization
-            instance.transform.SetParent(terrainGenerator.transform);
+            GameObject player = Instantiate(objectsToPlace[objectToPlaceIndex], objectSpawnPos, Quaternion.identity);
+            player.tag = "Player";
+            // Set the player as a child of the terrain generator for organization
+            // This will also be used by enemies to know when the player is in their "room" aka Terrain Generator
+            player.transform.SetParent(terrainGenerator.transform);
         }
     }
 }

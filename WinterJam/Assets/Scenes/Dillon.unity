@@ -173,7 +173,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3852222585838871946, guid: 53489876c7319d245969881a46d67912, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -228,14 +228,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1341778488169192900, guid: edef463e86afc2a4aac399bdf05c8122, type: 3}
+      propertyPath: terrainGenerator
+      value: 
+      objectReference: {fileID: 999482418}
     - target: {fileID: 6501826055030445678, guid: edef463e86afc2a4aac399bdf05c8122, type: 3}
       propertyPath: m_Name
       value: PlayerSpawner
       objectReference: {fileID: 0}
-    - target: {fileID: 8913820845691822762, guid: edef463e86afc2a4aac399bdf05c8122, type: 3}
-      propertyPath: terrainGenerator
-      value: 
-      objectReference: {fileID: 999482418}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -628,33 +628,9 @@ PrefabInstance:
       value: ObjectPlacer
       objectReference: {fileID: 0}
     - target: {fileID: 8806821690919901120, guid: 4894313752d0f804fa66e92ac79da45b, type: 3}
-      propertyPath: xBoundOffset
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8806821690919901120, guid: 4894313752d0f804fa66e92ac79da45b, type: 3}
-      propertyPath: zBoundOffset
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8806821690919901120, guid: 4894313752d0f804fa66e92ac79da45b, type: 3}
       propertyPath: terrainGenerator
       value: 
       objectReference: {fileID: 999482418}
-    - target: {fileID: 8806821690919901120, guid: 4894313752d0f804fa66e92ac79da45b, type: 3}
-      propertyPath: objectsToPlace.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8806821690919901120, guid: 4894313752d0f804fa66e92ac79da45b, type: 3}
-      propertyPath: 'objectsToPlace.Array.data[0]'
-      value: 
-      objectReference: {fileID: 4978477344614403285, guid: d0b952f57ee065b439c5dd16933aae8b, type: 3}
-    - target: {fileID: 8806821690919901120, guid: 4894313752d0f804fa66e92ac79da45b, type: 3}
-      propertyPath: 'objectsToPlace.Array.data[1]'
-      value: 
-      objectReference: {fileID: 1989982777827346957, guid: 039d3c7ac96b84b4493f48541396b2d3, type: 3}
-    - target: {fileID: 8806821690919901120, guid: 4894313752d0f804fa66e92ac79da45b, type: 3}
-      propertyPath: 'objectsToPlace.Array.data[2]'
-      value: 
-      objectReference: {fileID: 3054273620231127691, guid: 13a1ef6f98d8b4d4796e96450cd93d53, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

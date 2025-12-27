@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1042341150461955684}
-  - component: {fileID: 8913820845691822762}
+  - component: {fileID: 1341778488169192900}
   m_Layer: 0
   m_Name: PlayerSpawner
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8913820845691822762
+--- !u!114 &1341778488169192900
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,9 +41,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 6501826055030445678}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8eb1601008212d949843de8288c03363, type: 3}
+  m_Script: {fileID: 11500000, guid: c45c10ea0ad38fa40b4436e820619bac, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ObjectPlacer
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerPlacer
   terrainGenerator: {fileID: 0}
   objectsToPlace:
   - {fileID: 1759116198289419771, guid: ac962bd6534c4574999aeced185428e0, type: 3}
