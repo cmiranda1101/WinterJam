@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 5283907342419994830}
   - component: {fileID: 3417745087082250614}
   - component: {fileID: -4113054127485667576}
+  - component: {fileID: 4057234414777791027}
   - component: {fileID: 3960884637566632600}
   - component: {fileID: 8243563693804261594}
   - component: {fileID: 6728442194638176624}
-  - component: {fileID: 4057234414777791027}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -51,6 +51,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyAI
   behaviorGraphAgent: {fileID: 4057234414777791027}
   enemyController: {fileID: -4113054127485667576}
+  currentState: 0
 --- !u!114 &-4113054127485667576
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63,6 +64,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06f350a1868a2e74eb59c0510c27c22b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyController
+--- !u!114 &4057234414777791027
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3054273620231127691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0038c16c34866b4f9e25c9c0dc0f7e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Behavior::Unity.Behavior.BehaviorGraphAgent
+  m_Graph: {fileID: 6417656022690237715, guid: 85533befc55137e47b0f3818a27c21d5, type: 2}
+  m_BlackboardVariableOverridesList:
+  - rid: 1007553507011592878
+  m_OriginalGraph: {fileID: 6417656022690237715, guid: 85533befc55137e47b0f3818a27c21d5, type: 2}
+  m_IsInitialised: 0
+  m_IsStarted: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 1007553507011592878
+      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 1
+          m_Value1: 0
+        Name: Self
+        m_Value: {fileID: 3054273620231127691}
 --- !u!33 &3960884637566632600
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -143,32 +173,3 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4057234414777791027
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3054273620231127691}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0038c16c34866b4f9e25c9c0dc0f7e6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.Behavior::Unity.Behavior.BehaviorGraphAgent
-  m_Graph: {fileID: 2669869488768280273, guid: 85533befc55137e47b0f3818a27c21d5, type: 2}
-  m_BlackboardVariableOverridesList:
-  - rid: 1007553478771343610
-  m_OriginalGraph: {fileID: 0}
-  m_IsInitialised: 0
-  m_IsStarted: 0
-  references:
-    version: 2
-    RefIds:
-    - rid: 1007553478771343610
-      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        GUID:
-          m_Value0: 1
-          m_Value1: 0
-        Name: Self
-        m_Value: {fileID: 3054273620231127691}

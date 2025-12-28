@@ -5,18 +5,18 @@ using Unity.Behavior;
 
 public class EnemyAI : MonoBehaviour
 {
-    [SerializeField] BehaviorGraphAgent behaviorGraphAgent;
-
-    [SerializeField] EnemyController enemyController;
+    [SerializeField] public BehaviorGraphAgent behaviorGraphAgent;
+    [SerializeField] public EnemyController enemyController;
+    //public AIState currentState;
 
     NavMeshAgent agent;
     NavMeshController navMeshController;
+
     GameObject player;
 
     void Awake()
     {
         behaviorGraphAgent.BlackboardReference.SetVariableValue("self", this);
-
         behaviorGraphAgent.Init();
     }
 

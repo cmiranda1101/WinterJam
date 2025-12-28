@@ -2,9 +2,9 @@ using System;
 using Unity.Behavior;
 
 [BlackboardEnum]
-public enum State
+public enum AIState
 {
-	Attack,
+	GetCover,
 	Reload,
-	GetCover
+	Attack
 }

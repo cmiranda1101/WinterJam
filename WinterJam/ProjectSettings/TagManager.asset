@@ -6,6 +6,7 @@ TagManager:
   tags:
   - CantSpawnOn
   - Enemy
+  - Cover
   layers:
   - Default
   - TransparentFX
