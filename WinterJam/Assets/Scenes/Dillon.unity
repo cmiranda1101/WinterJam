@@ -296,53 +296,13 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7258911352118421808, guid: e56930119c09ca642b7ec43c014c900e, type: 3}
-      insertIndex: 3
-      addedObject: {fileID: 999482425}
-    - targetCorrespondingSourceObject: {fileID: 7258911352118421808, guid: e56930119c09ca642b7ec43c014c900e, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 999482426}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e56930119c09ca642b7ec43c014c900e, type: 3}
 --- !u!1 &999482418 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7258911352118421808, guid: e56930119c09ca642b7ec43c014c900e, type: 3}
   m_PrefabInstance: {fileID: 999482417}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &999482425
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 999482418}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4bf8124796c1cb4fa13dd1f78feeac8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AIRoomManager
-  roomCollider: {fileID: 999482426}
---- !u!65 &999482426
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 999482418}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Size: {x: 50, y: 5, z: 50}
-  m_Center: {x: 25, y: 0, z: 25}
 --- !u!1 &1025544989
 GameObject:
   m_ObjectHideFlags: 0
@@ -663,14 +623,6 @@ PrefabInstance:
       propertyPath: terrainGenerator
       value: 
       objectReference: {fileID: 999482418}
-    - target: {fileID: 8806821690919901120, guid: 4894313752d0f804fa66e92ac79da45b, type: 3}
-      propertyPath: objectsToPlace.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8806821690919901120, guid: 4894313752d0f804fa66e92ac79da45b, type: 3}
-      propertyPath: 'objectsToPlace.Array.data[2]'
-      value: 
-      objectReference: {fileID: 4786913389457042078, guid: ff60e91cf63b6c541b2c62802a3b6864, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
