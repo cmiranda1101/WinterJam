@@ -3,7 +3,7 @@ using UnityEngine;
 public class LevelGenerator : MonoBehaviour
 {
     [SerializeField] GameObject[] rooms;
-    [SerializeField] int numberOfRoomsToGenerate;
+    public int numberOfRoomsToGenerate;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -21,5 +21,6 @@ public class LevelGenerator : MonoBehaviour
     {
         GameObject roomToSpawn = rooms[Random.Range(0, rooms.Length)];
         Instantiate(roomToSpawn, _roomSpawnPos, Quaternion.identity);
+        numberOfRoomsToGenerate--;   
     }
 }

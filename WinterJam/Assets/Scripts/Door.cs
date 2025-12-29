@@ -30,9 +30,21 @@ public class Door : MonoBehaviour
         newRoomSpawnPos = transform.position - (transform.forward * 30);
         if (!CheckIfRoomExists(newRoomSpawnPos))
         {
-            newRoomSpawnPos.y = 0;
-            levelGeneratorScript.GenerateRoom(newRoomSpawnPos);
+            if (levelGeneratorScript.numberOfRoomsToGenerate > 0)
+            {
+                newRoomSpawnPos.y = 0;
+                levelGeneratorScript.GenerateRoom(newRoomSpawnPos);
+                TeleportPlayerToRoom();
+            }
         }
+        else
+        {
+            TeleportPlayerToRoom();
+        }
+    }
+
+    void TeleportPlayerToRoom()
+    {
         playerCharacterController.enabled = false;
         Vector3 newPlayerPos = transform.position - (transform.forward * 10);
         newPlayerPos.y = 1;

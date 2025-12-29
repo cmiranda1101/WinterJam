@@ -267,15 +267,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5615442944038572205, guid: a91bf19089b45cb43a8bd2203582518d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -40.26609
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5615442944038572205, guid: a91bf19089b45cb43a8bd2203582518d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5615442944038572205, guid: a91bf19089b45cb43a8bd2203582518d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 47.13056
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5615442944038572205, guid: a91bf19089b45cb43a8bd2203582518d, type: 3}
       propertyPath: m_LocalRotation.w
@@ -313,6 +313,10 @@ PrefabInstance:
       propertyPath: 'rooms.Array.data[1]'
       value: 
       objectReference: {fileID: 5603563221306650886, guid: 622af1826194f7b4998c474d16691c33, type: 3}
+    - target: {fileID: 7864692536767632225, guid: a91bf19089b45cb43a8bd2203582518d, type: 3}
+      propertyPath: numberOfRoomsToGenerate
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 8048392482299550760, guid: a91bf19089b45cb43a8bd2203582518d, type: 3}
       propertyPath: m_Name
       value: LevelGenerator
@@ -463,67 +467,6 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
---- !u!1001 &1919516999
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 5079572542869508417, guid: b3e6be9d42be156428b39403814983a8, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -35.84092
-      objectReference: {fileID: 0}
-    - target: {fileID: 5079572542869508417, guid: b3e6be9d42be156428b39403814983a8, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5079572542869508417, guid: b3e6be9d42be156428b39403814983a8, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -9.11537
-      objectReference: {fileID: 0}
-    - target: {fileID: 5079572542869508417, guid: b3e6be9d42be156428b39403814983a8, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5079572542869508417, guid: b3e6be9d42be156428b39403814983a8, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5079572542869508417, guid: b3e6be9d42be156428b39403814983a8, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5079572542869508417, guid: b3e6be9d42be156428b39403814983a8, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5079572542869508417, guid: b3e6be9d42be156428b39403814983a8, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5079572542869508417, guid: b3e6be9d42be156428b39403814983a8, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5079572542869508417, guid: b3e6be9d42be156428b39403814983a8, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5408868303480010373, guid: b3e6be9d42be156428b39403814983a8, type: 3}
-      propertyPath: m_Name
-      value: RoomDefault
-      objectReference: {fileID: 0}
-    - target: {fileID: 5449129607979335220, guid: b3e6be9d42be156428b39403814983a8, type: 3}
-      propertyPath: m_NavMeshData
-      value: 
-      objectReference: {fileID: 23800000, guid: f844c48238c63134284f2b139a523b79, type: 2}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: b3e6be9d42be156428b39403814983a8, type: 3}
 --- !u!1 &2055305715
 GameObject:
   m_ObjectHideFlags: 0
@@ -820,4 +763,3 @@ SceneRoots:
   - {fileID: 2859539397040499529}
   - {fileID: 467042753}
   - {fileID: 1482998799}
-  - {fileID: 1919516999}
