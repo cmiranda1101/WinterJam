@@ -7,8 +7,9 @@ public class Door : MonoBehaviour
     GameObject player;
     CharacterController playerCharacterController;
 
-    bool roomGenerated = false;
-    public int enemiesAlive;
+    //bool roomGenerated = false;
+    int enemiesAlive;
+    Vector3 newRoomSpawnPos;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -26,18 +27,33 @@ public class Door : MonoBehaviour
 
     void GoToNextRoom()
     {
-        if (roomGenerated == false)
+        newRoomSpawnPos = transform.position - (transform.forward * 30);
+        if (!CheckIfRoomExists(newRoomSpawnPos))
         {
-            Vector3 newRoomSpawnPos = transform.position - (transform.forward * 30);
             newRoomSpawnPos.y = 0;
             levelGeneratorScript.GenerateRoom(newRoomSpawnPos);
-            roomGenerated = true;
         }
         playerCharacterController.enabled = false;
         Vector3 newPlayerPos = transform.position - (transform.forward * 10);
         newPlayerPos.y = 1;
-        player.transform.position =newPlayerPos;
+        player.transform.position = newPlayerPos;
         playerCharacterController.enabled = true;
+    }
+
+    bool CheckIfRoomExists(Vector3 _posToCheck)
+    {
+        bool doesRoomExist = false;
+        Debug.Log(_posToCheck);
+        _posToCheck.y = 20;
+        RaycastHit hit;
+        if (Physics.Raycast(_posToCheck, Vector3.down, out hit))
+        {
+            if (hit.collider != null)
+            {
+                doesRoomExist = true;
+            }
+        }
+        return doesRoomExist;
     }
 
     public void OnTriggerEnter(Collider other)
