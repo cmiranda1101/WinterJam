@@ -17,10 +17,12 @@ public class CoverObjects : MonoBehaviour
     }
     private async Task OnStart()
     {
+        /*
         while (navMeshController.isBaking)
         {
             await Task.Yield();
         }
+        */
         foreach (Transform childTransform in transform)
         {
             if(childTransform.CompareTag("Cover"))
