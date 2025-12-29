@@ -6,19 +6,25 @@ public class CoverPoints : MonoBehaviour
 {
     [SerializeField] public List<Transform> coverPoints;
     private AIState currentState;
+    GameObject player;
+    async private void Start()
+    {
+        await System.Threading.Tasks.Task.Delay(100); // Small delay to ensure other systems are initialized
+        player = GameObject.FindGameObjectWithTag("Player");
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Enemy"))
         {
             EnemyAI enemyAI = other.GetComponent<EnemyAI>();
-            if (enemyAI != null && enemyAI.behaviorGraphAgent.BlackboardReference.GetVariableValue("AIState", out currentState))
+            if (enemyAI != null)
             {
                 Transform closestTransform = coverPoints[0].transform;
                 for (int i = 0; i < coverPoints.Count; i++)
                 {
-                    float distanceToCoverPoint = Vector3.Distance(other.transform.position, coverPoints[i].position);
-                    float distanceToCurrentBest = Vector3.Distance(other.transform.position, closestTransform.position);
-                    if (distanceToCoverPoint < distanceToCurrentBest)
+                    float distanceToPlayer = Vector3.Distance(player.transform.position, coverPoints[i].position);
+                    float furthestFromPlayer = Vector3.Distance(player.transform.position, closestTransform.position);
+                    if (distanceToPlayer > furthestFromPlayer)
                     {
                         closestTransform = coverPoints[i].transform;
                     }

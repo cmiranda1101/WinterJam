@@ -6,7 +6,7 @@ public class EnemyController : MonoBehaviour
 {
     NavMeshAgent agent;
     
-    bool isMoving = false;
+    public bool isMoving = false;
 
     void Start()
     {
@@ -40,9 +40,10 @@ public class EnemyController : MonoBehaviour
     public void SetDestination(Vector3 destination)
     {
         NavMeshHit hit;
-        if(NavMesh.SamplePosition(destination, out hit, 1f, NavMesh.AllAreas))
+        if(NavMesh.SamplePosition(destination, out hit, 10f, NavMesh.AllAreas))
         {
             agent.SetDestination(hit.position);
+            isMoving = true;
         }
     }
 }
