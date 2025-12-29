@@ -21,7 +21,7 @@ public class TerrainGenerator : MonoBehaviour
         zOffset = Random.Range(0f, 999999f);
         terrain = new Mesh();
         GetComponent<MeshFilter>().mesh = terrain;
-        CreateLevelTerrain();
+        //CreateLevelTerrain();
     }
 
     void GenerateTerrain()
