@@ -5,10 +5,10 @@ using Action = Unity.Behavior.Action;
 using Unity.Properties;
 
 [Serializable, GeneratePropertyBag]
-[NodeDescription(name: "Attack", story: "[Agent] Attacks", category: "Action", id: "a7d91e9cbf2c124024f9f5a96a3c45e2")]
-public partial class AttackAction : Action
+[NodeDescription(name: "Idle", story: "Waits until [isInitialized]", category: "Action", id: "1afbda3bc34c6f48cfbfeaff66c712dd")]
+public partial class IdleAction : Action
 {
-    [SerializeReference] public BlackboardVariable<GameObject> Agent;
+    [SerializeReference] public BlackboardVariable<bool> isInitialized;
 
     protected override Status OnStart()
     {
@@ -17,6 +17,10 @@ public partial class AttackAction : Action
 
     protected override Status OnUpdate()
     {
+        if(isInitialized.Value)
+        {
+            return Status.Success;
+        }
         return Status.Running;
     }
 
