@@ -21,19 +21,7 @@ public class TerrainGenerator : MonoBehaviour
         zOffset = Random.Range(0f, 999999f);
         terrain = new Mesh();
         GetComponent<MeshFilter>().mesh = terrain;
-        GenerateTerrain();
-        UpdateTerrainMesh();
-    }
-
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        CreateLevelTerrain();
     }
 
     void GenerateTerrain()
@@ -82,6 +70,12 @@ public class TerrainGenerator : MonoBehaviour
         terrain.triangles = triangles;
         terrain.RecalculateNormals();
         gameObject.AddComponent<MeshCollider>();
+    }
+
+    public void CreateLevelTerrain()
+    {
+        GenerateTerrain();
+        UpdateTerrainMesh();
     }
 
     //debug function, remove before final release

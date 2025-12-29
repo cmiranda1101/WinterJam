@@ -6,6 +6,8 @@ TagManager:
   tags:
   - CantSpawnOn
   - Enemy
+  - ObjectPlacer
+  - LevelGenerator
   layers:
   - Default
   - TransparentFX
