@@ -29,6 +29,8 @@ public class PlayerController : MonoBehaviour, IDamage
 
     private void Start()
     {
+        GameManager.instance.RegisterPlayer(this);
+
         targetHealthRatio = 1.0f;
         health = maxHealth;
     }
