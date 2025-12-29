@@ -302,6 +302,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7864692536767632225, guid: a91bf19089b45cb43a8bd2203582518d, type: 3}
+      propertyPath: rooms.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7864692536767632225, guid: a91bf19089b45cb43a8bd2203582518d, type: 3}
+      propertyPath: 'rooms.Array.data[1]'
+      value: 
+      objectReference: {fileID: 5408868303480010373, guid: d74da23d215a8dd49bd31f89ce8d3734, type: 3}
     - target: {fileID: 8048392482299550760, guid: a91bf19089b45cb43a8bd2203582518d, type: 3}
       propertyPath: m_Name
       value: LevelGenerator
