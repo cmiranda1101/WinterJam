@@ -83,7 +83,7 @@ public class PlayerController : MonoBehaviour, IDamage
         playerCam.transform.localRotation = Quaternion.Euler(pitch, 0, 0);
     }
 
-    public void TakeDamage(int amount)
+    public void TakeDamage(float amount)
     {
         health -= amount;
         health = Mathf.Clamp(health, 0, maxHealth);
