@@ -10,7 +10,6 @@ public class EnemyAI : MonoBehaviour
     [HideInInspector] public CoverObjects coverObjects;
 
     NavMeshAgent agent;
-    NavMeshController navMeshController;
 
     GameObject player;
 
@@ -21,9 +20,8 @@ public class EnemyAI : MonoBehaviour
 
     void Start()
     {
-        navMeshController = GetComponentInParent<NavMeshController>();
         coverObjects = GetComponentInParent<CoverObjects>();
-        _ = EnableAgentWhenNavMeshReady(navMeshController);
+        EnableAgent();
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
@@ -31,12 +29,8 @@ public class EnemyAI : MonoBehaviour
     {
     }
 
-    public async Task EnableAgentWhenNavMeshReady(NavMeshController navMeshController)
+    public void EnableAgent()
     {
-        while (navMeshController.isBaking)
-        {
-            await Task.Yield();
-        }
         agent = gameObject.AddComponent<NavMeshAgent>();
         agent.enabled = true;
         behaviorGraphAgent.BlackboardReference.SetVariableValue("self", gameObject);

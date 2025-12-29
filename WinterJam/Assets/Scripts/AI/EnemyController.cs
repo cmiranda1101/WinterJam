@@ -4,13 +4,13 @@ using static Unity.Behavior.Node;
 
 public class EnemyController : MonoBehaviour
 {
-    NavMeshAgent agent;
+    public NavMeshAgent agent;
     
     public bool isMoving = false;
 
     void Start()
     {
-        agent = GetComponent<NavMeshAgent>();
+        agent = gameObject.GetComponent<NavMeshAgent>();
     }
 
     public Status PatrolArea()

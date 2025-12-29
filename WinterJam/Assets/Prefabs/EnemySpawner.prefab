@@ -49,5 +49,5 @@ MonoBehaviour:
   - {fileID: 3054273620231127691, guid: 13a1ef6f98d8b4d4796e96450cd93d53, type: 3}
   objectDensity: 3
   maxHeight: 20
-  xBoundOffset: 2
-  zBoundOffset: 2
+  xBoundOffset: 5
+  zBoundOffset: 5
