@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class DEBUG_DAMAGEBLOCK : MonoBehaviour
 {
+    [SerializeField] float testDamage;
+
     public Collider col;
 
     private void Start()
@@ -14,7 +16,7 @@ public class DEBUG_DAMAGEBLOCK : MonoBehaviour
         IDamage dmg = other.GetComponentInParent<IDamage>();
         if (dmg != null)
         {
-            dmg.TakeDamage(2);
+            dmg.TakeDamage(testDamage);
         }
     }
 }

@@ -29,6 +29,8 @@ public class PlayerController : MonoBehaviour, IDamage
 
     private void Start()
     {
+        GameManager.instance.RegisterPlayer(this);
+
         targetHealthRatio = 1.0f;
         health = maxHealth;
     }
@@ -83,7 +85,7 @@ public class PlayerController : MonoBehaviour, IDamage
         playerCam.transform.localRotation = Quaternion.Euler(pitch, 0, 0);
     }
 
-    public void TakeDamage(int amount)
+    public void TakeDamage(float amount)
     {
         health -= amount;
         health = Mathf.Clamp(health, 0, maxHealth);

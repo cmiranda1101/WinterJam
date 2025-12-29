@@ -36,9 +36,6 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
-        playerScript = player.GetComponent<PlayerController>();
-
         Cursor.lockState = CursorLockMode.Locked;  // put cursor to center
         Cursor.visible = false;
     }
@@ -79,5 +76,11 @@ public class GameManager : MonoBehaviour
             Cursor.visible = false;
             //pauseMenu.SetActive(false);
         }
+    }
+
+    public void RegisterPlayer(PlayerController player)
+    {
+        playerScript = player;
+        this.player = player.gameObject;
     }
 }

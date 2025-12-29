@@ -11,8 +11,11 @@ GameObject:
   - component: {fileID: 7476195403926812895}
   - component: {fileID: 8674695385624664939}
   - component: {fileID: 4828227394650453571}
+  - component: {fileID: 9154342949020157018}
   - component: {fileID: 7914999820761702196}
   - component: {fileID: 7546656412946939096}
+  - component: {fileID: 5395249593600894109}
+  - component: {fileID: 5047854179815880797}
   m_Layer: 0
   m_Name: TerrainGenerator
   m_TagString: Untagged
@@ -92,6 +95,19 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &9154342949020157018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7258911352118421808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4bf8124796c1cb4fa13dd1f78feeac8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AIRoomManager
+  roomCollider: {fileID: 5047854179815880797}
 --- !u!114 &7914999820761702196
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -121,3 +137,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 288a2c723e2eae64ca7ed6398c1404f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NavMeshController
+  isBaking: 1
+--- !u!114 &5395249593600894109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7258911352118421808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d65777184a1d1454895f66119527b5ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CoverObjects
+  coverObjects: []
+--- !u!65 &5047854179815880797
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7258911352118421808}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Size: {x: 50, y: 5, z: 50}
+  m_Center: {x: 25, y: 0, z: 25}
