@@ -94,6 +94,7 @@ public class PlayerController : MonoBehaviour, IDamage
         if (health == 0)
         {
             GameManager.instance.HUD.SetActive(false);
+            GameManager.instance.isDead = true;
             controls.Player.Disable();
         }
     }
