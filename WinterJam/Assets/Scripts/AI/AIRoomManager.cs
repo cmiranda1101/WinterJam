@@ -8,18 +8,10 @@ public class AIRoomManager : MonoBehaviour
     [SerializeField] BoxCollider roomCollider;
 
     List<GameObject> enemiesInRoom;
-    NavMeshController navMeshController;
     private async void Start()
     {
         enemiesInRoom = new List<GameObject>();
-        /*
-        navMeshController = GetComponent<NavMeshController>();
-
-        while (navMeshController.isBaking)
-        {
-            await Task.Yield();
-        }
-        */
+        
         roomCollider.enabled = true;
 
         foreach (Transform child in transform)
