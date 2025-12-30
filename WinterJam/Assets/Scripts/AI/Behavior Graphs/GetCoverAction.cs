@@ -5,13 +5,15 @@ using Action = Unity.Behavior.Action;
 using Unity.Properties;
 
 [Serializable, GeneratePropertyBag]
-[NodeDescription(name: "GetCover", story: "[Agent] Finds [Cover] Using [Controller] Sets [EnemyAI] State", category: "Action", id: "7d8b01d4633862f629200e92a85113d8")]
+[NodeDescription(name: "GetCover", story: "[Agent] Finds [Cover] Using [Controller] Sets [EnemyAI] State And [CurrentCover] Checks If [isMoving]", category: "Action", id: "7d8b01d4633862f629200e92a85113d8")]
 public partial class GetCoverAction : Action
 {
     [SerializeReference] public BlackboardVariable<GameObject> Agent;
     [SerializeReference] public BlackboardVariable<CoverObjects> Cover;
     [SerializeReference] public BlackboardVariable<EnemyController> Controller;
     [SerializeReference] public BlackboardVariable<EnemyAI> Enemy;
+    [SerializeReference] public BlackboardVariable<bool> isMoving;
+    [SerializeReference] public BlackboardVariable<GameObject> CurrentCover;
     Vector3 distanceToCover;
     Vector3 closestCoverPosition;
     protected override Status OnStart()
@@ -39,25 +41,49 @@ public partial class GetCoverAction : Action
             Debug.LogWarning("GetCoverAction.cs: EnemyAI component not found on Agent.");
             return Status.Failure;
         }
-        if(Controller.Value.isMoving)
+        if(!Controller.Value.navMeshAgent.pathPending && Controller.Value.navMeshAgent.remainingDistance <= Controller.Value.navMeshAgent.stoppingDistance)
+        {
+            isMoving.Value = false;
+        }
+        if(isMoving.Value)
         {
             return Status.Running;
         }
-        else
+        else if (CurrentCover.Value == null)
         {
             foreach (var cover in Cover.Value.coverObjects)
             {
-                distanceToCover = cover.transform.position - Agent.Value.transform.position;
+                if(cover.Value != CoverState.Empty) { continue; }
+
+                distanceToCover = cover.Key.transform.position - Agent.Value.transform.position;
                 if (closestCoverPosition == Vector3.zero ||
                     distanceToCover.magnitude < (closestCoverPosition - Agent.Value.transform.position).magnitude)
                 {
-                    closestCoverPosition = cover.transform.position;
+                    closestCoverPosition = cover.Key.transform.position;
+                    CurrentCover = (BlackboardVariable<GameObject>)cover.Key;
                 }
             }
-            Controller.Value.SetDestination(closestCoverPosition);
+            
+            if(CurrentCover.Value != null)
+            {
+                Controller.Value.SetDestination(closestCoverPosition);
+                isMoving.Value = true;
+                Cover.Value.coverObjects[CurrentCover.Value] = CoverState.Reserved;
+                return Status.Running;
+            }
+            else if(CurrentCover.Value == null)
+            {
+                Enemy.Value.behaviorGraphAgent.SetVariableValue("AIState", AIState.Attack);
+                return Status.Success;
+            }
+        }
+        else if (CurrentCover.Value != null && !isMoving.Value)
+        {
+            Enemy.Value.behaviorGraphAgent.SetVariableValue("inCover", true);
             Enemy.Value.behaviorGraphAgent.SetVariableValue("AIState", AIState.Attack);
             return Status.Success;
         }
+        return Status.Running;
     }
 
     protected override void OnEnd()

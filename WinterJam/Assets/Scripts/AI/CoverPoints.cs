@@ -5,7 +5,6 @@ using UnityEngine;
 public class CoverPoints : MonoBehaviour
 {
     [SerializeField] public List<Transform> coverPoints;
-    private AIState currentState;
     GameObject player;
     async private void Start()
     {
