@@ -12,7 +12,8 @@ public class GameManager : MonoBehaviour
     public PlayerController playerScript;
     public GameObject HUD;
     public GameObject pauseMenu;
-    public GameObject Settings;
+    public GameObject SettingsMenu;
+    public GameObject ControlsMenu;
     public ButtonFunctions buttonFunctions;
     public Image playerHealth;
     public Image playerStamina;
@@ -20,6 +21,7 @@ public class GameManager : MonoBehaviour
     public bool isDead;
 
     public static GameManager instance { get; private set; }
+    public static AudioManager audioManager {get; private set;}
 
 
 
@@ -47,7 +49,8 @@ public class GameManager : MonoBehaviour
 
         HUD.SetActive(true);
         pauseMenu.SetActive(false);
-        Settings.SetActive(false);
+        SettingsMenu.SetActive(false);
+        ControlsMenu.SetActive(false);
     }
 
     private void OnEnable()
@@ -100,5 +103,10 @@ public class GameManager : MonoBehaviour
     {
         playerScript = player;
         this.player = player.gameObject;
+    }
+
+    public void RegisterAudioManager(AudioManager AM)
+    {
+        audioManager = AM;
     }
 }
