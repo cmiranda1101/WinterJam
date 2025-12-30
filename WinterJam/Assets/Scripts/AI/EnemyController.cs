@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Unity.Behavior;
 using UnityEngine;
 using UnityEngine.AI;
@@ -5,7 +6,7 @@ using static Unity.Behavior.Node;
 
 public class EnemyController : MonoBehaviour
 {
-    [SerializeField] NavMeshAgent navMeshAgent;
+    [SerializeField] public NavMeshAgent navMeshAgent;
     [SerializeField] BehaviorGraphAgent behaviorGraphAgent;
 
     BlackboardVariable<bool> isMoving;
@@ -45,7 +46,6 @@ public class EnemyController : MonoBehaviour
         if(NavMesh.SamplePosition(destination, out hit, 10f, NavMesh.AllAreas))
         {
             navMeshAgent.SetDestination(hit.position);
-            behaviorGraphAgent.SetVariableValue("isMoving", true);
         }
     }
 }
