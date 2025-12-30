@@ -9,8 +9,6 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] public EnemyController enemyController;
     [HideInInspector] public CoverObjects coverObjects;
 
-    NavMeshAgent agent;
-
     GameObject player;
 
     void Awake()
@@ -21,18 +19,16 @@ public class EnemyAI : MonoBehaviour
     void Start()
     {
         coverObjects = GetComponentInParent<CoverObjects>();
-        EnableAgent();
         player = GameObject.FindGameObjectWithTag("Player");
+        InitializeBehaviorGraph();
     }
 
     void Update()
     {
     }
 
-    public void EnableAgent()
+    public void InitializeBehaviorGraph()
     {
-        agent = gameObject.AddComponent<NavMeshAgent>();
-        agent.enabled = true;
         behaviorGraphAgent.BlackboardReference.SetVariableValue("self", gameObject);
         behaviorGraphAgent.BlackboardReference.SetVariableValue("EnemyAI", this);
         behaviorGraphAgent.BlackboardReference.SetVariableValue("EnemyController", enemyController);
