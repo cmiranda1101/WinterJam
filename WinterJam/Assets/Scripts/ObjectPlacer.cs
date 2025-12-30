@@ -23,7 +23,7 @@ public class ObjectPlacer : MonoBehaviour
     }
 
 
-    void RandomlyPlaceObjects()
+    public void RandomlyPlaceObjects()
     {
         Vector3 objectSpawnPos;
         for (int i = 0; i < objectDensity; i++)

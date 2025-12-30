@@ -65,6 +65,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06f350a1868a2e74eb59c0510c27c22b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyController
+  agent: {fileID: 0}
   isMoving: 0
 --- !u!114 &4057234414777791027
 MonoBehaviour:

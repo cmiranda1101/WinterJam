@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5293175577804383361
+--- !u!1 &8048392482299550760
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,22 +8,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1078304417598693851}
-  - component: {fileID: 8806821690919901120}
+  - component: {fileID: 5615442944038572205}
+  - component: {fileID: 7864692536767632225}
   m_Layer: 0
-  m_Name: ObjectPlacer
-  m_TagString: ObjectPlacer
+  m_Name: LevelGenerator
+  m_TagString: LevelGenerator
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1078304417598693851
+--- !u!4 &5615442944038572205
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5293175577804383361}
+  m_GameObject: {fileID: 8048392482299550760}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -32,22 +32,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8806821690919901120
+--- !u!114 &7864692536767632225
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5293175577804383361}
+  m_GameObject: {fileID: 8048392482299550760}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8eb1601008212d949843de8288c03363, type: 3}
+  m_Script: {fileID: 11500000, guid: 35be8ebdd40b6fb49994b7185015d0c6, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ObjectPlacer
-  terrainGenerator: {fileID: 0}
-  objectsToPlace:
-  - {fileID: 4786913389457042078, guid: ff60e91cf63b6c541b2c62802a3b6864, type: 3}
-  objectDensity: 10
-  maxHeight: 20
-  xBoundOffset: 2
-  zBoundOffset: 2
+  m_EditorClassIdentifier: Assembly-CSharp::LevelGenerator
+  rooms:
+  - {fileID: 5408868303480010373, guid: b3e6be9d42be156428b39403814983a8, type: 3}
+  numberOfRoomsToGenerate: 1

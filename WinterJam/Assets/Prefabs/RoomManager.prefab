@@ -12,17 +12,16 @@ GameObject:
   - component: {fileID: 8674695385624664939}
   - component: {fileID: 4828227394650453571}
   - component: {fileID: 9154342949020157018}
-  - component: {fileID: 7914999820761702196}
-  - component: {fileID: 7546656412946939096}
   - component: {fileID: 5395249593600894109}
   - component: {fileID: 5047854179815880797}
+  - component: {fileID: 5568802187897173041}
   m_Layer: 0
-  m_Name: TerrainGenerator
+  m_Name: RoomManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7476195403926812895
 Transform:
   m_ObjectHideFlags: 0
@@ -108,36 +107,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AIRoomManager
   roomCollider: {fileID: 5047854179815880797}
---- !u!114 &7914999820761702196
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7258911352118421808}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88e7dbc0f651d2a409caf8cd72d3ad38, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TerrainGenerator
-  xSize: 50
-  zSize: 50
-  xOffset: 100
-  zOffset: 100
-  flatTerrain: 1
---- !u!114 &7546656412946939096
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7258911352118421808}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 288a2c723e2eae64ca7ed6398c1404f3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::NavMeshController
-  isBaking: 1
 --- !u!114 &5395249593600894109
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -172,3 +141,20 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 50, y: 5, z: 50}
   m_Center: {x: 25, y: 0, z: 25}
+--- !u!114 &5568802187897173041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7258911352118421808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88e7dbc0f651d2a409caf8cd72d3ad38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TerrainGenerator
+  xSize: 50
+  zSize: 50
+  xOffset: 100
+  zOffset: 100
+  flatTerrain: 0

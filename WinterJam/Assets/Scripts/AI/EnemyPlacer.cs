@@ -22,26 +22,22 @@ public class EnemyPlacer : MonoBehaviour
         navMeshController = terrainGenerator.GetComponent<NavMeshController>();
         xBound = terrainGeneratorScript.xSize - xBoundOffset;
         zBound = terrainGeneratorScript.zSize - zBoundOffset;
-        StartCoroutine(RandomlyPlaceEnemies());
+        RandomlyPlaceEnemies();
     }
-
+    
     // Coroutine to randomly place enemies after the NavMesh is baked
-    public IEnumerator RandomlyPlaceEnemies()
+    public void RandomlyPlaceEnemies()
     {
-        // Wait until the NavMesh is done baking
-        while (navMeshController.isBaking)
-        {
-            yield return null;
-        }
         Vector3 objectSpawnPos;
         for (int i = 0; i < objectDensity; i++)
         {
             float sampleX = Random.Range(xBoundOffset, xBound);
             float sampleZ = Random.Range(zBoundOffset, zBound);
-            Vector3 randomPos = new Vector3(sampleX, maxHeight, sampleZ);
+            Vector3 randomPos = new Vector3(transform.parent.position.x + sampleX, maxHeight, transform.parent.position.z + sampleZ);
+            Debug.Log(randomPos);
             int objectToPlaceIndex = Random.Range(0, objectsToPlace.Length);
             RaycastHit hit;
-            if (Physics.Raycast(randomPos, Vector3.down, out hit, maxHeight + 1) && hit.transform.gameObject.tag != "CantSpawnOn") //make sure all objects spawned using object spawn have this tag to avoid them spawning on each other
+            if (Physics.Raycast(randomPos, Vector3.down, out hit) && hit.transform.gameObject.tag != "CantSpawnOn") //make sure all objects spawned using object spawn have this tag to avoid them spawning on each other
             {
                 objectSpawnPos = new Vector3(hit.point.x, hit.point.y + 0.8f, hit.point.z);
             }
@@ -55,6 +51,5 @@ public class EnemyPlacer : MonoBehaviour
             // This is also used by the enemy controller to know when the NavMesh is ready
             instance.transform.SetParent(terrainGenerator.transform);
         }
-        yield break;
     }
 }
