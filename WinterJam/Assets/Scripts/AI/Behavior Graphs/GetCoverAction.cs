@@ -12,6 +12,7 @@ public partial class GetCoverAction : Action
     [SerializeReference] public BlackboardVariable<CoverObjects> Cover;
     [SerializeReference] public BlackboardVariable<EnemyController> Controller;
     [SerializeReference] public BlackboardVariable<EnemyAI> Enemy;
+    [SerializeReference] public BlackboardVariable<bool> isMoving;
     Vector3 distanceToCover;
     Vector3 closestCoverPosition;
     protected override Status OnStart()
@@ -39,22 +40,32 @@ public partial class GetCoverAction : Action
             Debug.LogWarning("GetCoverAction.cs: EnemyAI component not found on Agent.");
             return Status.Failure;
         }
-        if(Controller.Value.isMoving)
+        if(isMoving)
         {
             return Status.Running;
         }
         else
         {
+            GameObject currentCover = null;
             foreach (var cover in Cover.Value.coverObjects)
             {
-                distanceToCover = cover.transform.position - Agent.Value.transform.position;
+                if(cover.Value != CoverState.Empty) { continue; }
+
+                distanceToCover = cover.Key.transform.position - Agent.Value.transform.position;
                 if (closestCoverPosition == Vector3.zero ||
                     distanceToCover.magnitude < (closestCoverPosition - Agent.Value.transform.position).magnitude)
                 {
-                    closestCoverPosition = cover.transform.position;
+                    closestCoverPosition = cover.Key.transform.position;
+                    currentCover = cover.Key;
                 }
             }
-            Controller.Value.SetDestination(closestCoverPosition);
+            
+            if(currentCover != null)
+            {
+                Controller.Value.SetDestination(closestCoverPosition);
+                Cover.Value.coverObjects[currentCover] = CoverState.Reserved;
+                Enemy.Value.behaviorGraphAgent.SetVariableValue("CurrentCover", currentCover);
+            }
             Enemy.Value.behaviorGraphAgent.SetVariableValue("AIState", AIState.Attack);
             return Status.Success;
         }

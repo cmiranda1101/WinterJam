@@ -1,20 +1,22 @@
+using Unity.Behavior;
 using UnityEngine;
 using UnityEngine.AI;
 using static Unity.Behavior.Node;
 
 public class EnemyController : MonoBehaviour
 {
-    NavMeshAgent agent;
-    
-    public bool isMoving = false;
+    [SerializeField] NavMeshAgent navMeshAgent;
+    [SerializeField] BehaviorGraphAgent behaviorGraphAgent;
+
+    BlackboardVariable<bool> isMoving;
 
     void Start()
     {
-        agent = GetComponent<NavMeshAgent>();
     }
 
     public Status PatrolArea()
     {
+        behaviorGraphAgent.GetVariable("isMoving", out isMoving);
         if (!isMoving)
         {
             Vector3 randomDirection = Random.insideUnitSphere * 10f;
@@ -22,15 +24,15 @@ public class EnemyController : MonoBehaviour
             NavMeshHit hit;
             if (NavMesh.SamplePosition(randomDirection, out hit, 10f, NavMesh.AllAreas))
             {
-                agent.SetDestination(hit.position);
-                isMoving = true;
+                navMeshAgent.SetDestination(hit.position);
+                behaviorGraphAgent.SetVariableValue("isMoving", true);
             }
         }
         else
         {
-            if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
+            if (!navMeshAgent.pathPending && navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance)
             {
-                isMoving = false;
+                behaviorGraphAgent.SetVariableValue("isMoving", false);
                 return Status.Success;
             }
         }
@@ -42,8 +44,8 @@ public class EnemyController : MonoBehaviour
         NavMeshHit hit;
         if(NavMesh.SamplePosition(destination, out hit, 10f, NavMesh.AllAreas))
         {
-            agent.SetDestination(hit.position);
-            isMoving = true;
+            navMeshAgent.SetDestination(hit.position);
+            behaviorGraphAgent.SetVariableValue("isMoving", true);
         }
     }
 }

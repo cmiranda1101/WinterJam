@@ -167,6 +167,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7864692536767632225, guid: a91bf19089b45cb43a8bd2203582518d, type: 3}
+      propertyPath: numberOfRoomsToGenerate
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8048392482299550760, guid: a91bf19089b45cb43a8bd2203582518d, type: 3}
       propertyPath: m_Name
       value: LevelGenerator
@@ -243,6 +247,10 @@ PrefabInstance:
     - target: {fileID: 1759116198289419771, guid: ac962bd6534c4574999aeced185428e0, type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1759116198289419771, guid: ac962bd6534c4574999aeced185428e0, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1997948439657207740, guid: ac962bd6534c4574999aeced185428e0, type: 3}
       propertyPath: m_Layer

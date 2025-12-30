@@ -18,8 +18,9 @@ public class EnemyPlacer : MonoBehaviour
     void Start()
     {
         terrainGeneratorScript = terrainGenerator.GetComponent<TerrainGenerator>();
-        xBound = terrainGeneratorScript.xSize - xBoundOffset;
-        zBound = terrainGeneratorScript.zSize - zBoundOffset;
+        //Divide by 2 to get half the size since the terrain is centered at (0,0)
+        xBound = terrainGeneratorScript.xSize/2 - xBoundOffset;
+        zBound = terrainGeneratorScript.zSize/2 - zBoundOffset;
         RandomlyPlaceEnemies();
     }
     
@@ -28,8 +29,9 @@ public class EnemyPlacer : MonoBehaviour
         Vector3 objectSpawnPos;
         for (int i = 0; i < objectDensity; i++)
         {
-            float sampleX = Random.Range(xBoundOffset, xBound);
-            float sampleZ = Random.Range(zBoundOffset, zBound);
+            //Generate random position within bounds of terrain adjusted for centering
+            float sampleX = Random.Range(-xBound, xBound);
+            float sampleZ = Random.Range(-zBoundOffset, zBound);
             Vector3 randomPos = new Vector3(transform.parent.position.x + sampleX, maxHeight, transform.parent.position.z + sampleZ);
             Debug.Log(randomPos);
             int objectToPlaceIndex = Random.Range(0, objectsToPlace.Length);

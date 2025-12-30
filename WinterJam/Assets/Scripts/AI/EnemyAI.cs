@@ -1,6 +1,4 @@
 using UnityEngine;
-using UnityEngine.AI;
-using System.Threading.Tasks;
 using Unity.Behavior;
 
 public class EnemyAI : MonoBehaviour
