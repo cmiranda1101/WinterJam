@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public GameObject HUD;
     public GameObject pauseMenu;
     public GameObject Settings;
+    public ButtonFunctions buttonFunctions;
     public Image playerHealth;
     public Image playerStamina;
     public bool isPaused;
@@ -64,7 +65,7 @@ public class GameManager : MonoBehaviour
 
     private void OnPause(InputAction.CallbackContext ctx)
     {
-        if (!isDead)
+        if (!playerScript.isDead)
             TogglePause();
     }
 
@@ -87,8 +88,11 @@ public class GameManager : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
             HUD.SetActive(!isPaused);
-            menueQueue.Clear();
-            pauseMenu.SetActive(false);
+            while(menueQueue.Count > 0)
+            {
+                menueQueue.Peek().SetActive(false);
+                menueQueue.Pop();
+            }
         }
     }
 

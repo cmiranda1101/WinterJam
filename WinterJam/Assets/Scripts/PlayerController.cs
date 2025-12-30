@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour, IDamage
     [SerializeField] private float healthUpdateSpeed;
 
     [ReadOnly] public float health;
+    public bool isDead { get; private set; }
 
     private void Awake()
     {
@@ -33,6 +34,7 @@ public class PlayerController : MonoBehaviour, IDamage
 
         targetHealthRatio = 1.0f;
         health = maxHealth;
+        isDead = false;
     }
 
     private void OnEnable() // Gaurds against Null Ref other edge cases I hit
@@ -96,6 +98,7 @@ public class PlayerController : MonoBehaviour, IDamage
             GameManager.instance.HUD.SetActive(false);
             GameManager.instance.isDead = true;
             controls.Player.Disable();
+            isDead = true;
         }
     }
 
