@@ -8,7 +8,7 @@ public class AIRoomManager : MonoBehaviour
     [SerializeField] BoxCollider roomCollider;
 
     List<GameObject> enemiesInRoom;
-    private async void Start()
+    void Start()
     {
         enemiesInRoom = new List<GameObject>();
         
@@ -20,7 +20,6 @@ public class AIRoomManager : MonoBehaviour
             {
                 enemiesInRoom.Add(child.gameObject);
             }
-            await Task.Yield();
         }
     }
 
