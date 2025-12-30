@@ -11,7 +11,7 @@ PrefabInstance:
     - target: {fileID: 1176791452983223118, guid: b3e6be9d42be156428b39403814983a8, type: 3}
       propertyPath: terrainGenerator
       value: 
-      objectReference: {fileID: 5590895560220915900}
+      objectReference: {fileID: 0}
     - target: {fileID: 2185128960342277281, guid: b3e6be9d42be156428b39403814983a8, type: 3}
       propertyPath: m_NavMeshData
       value: 
@@ -64,6 +64,10 @@ PrefabInstance:
       propertyPath: m_NavMeshData
       value: 
       objectReference: {fileID: 23800000, guid: 9433da6c0d70b544e982015b15e23ef0, type: 2}
+    - target: {fileID: 8567770105598053712, guid: b3e6be9d42be156428b39403814983a8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 2866934829649165520, guid: b3e6be9d42be156428b39403814983a8, type: 3}
@@ -79,11 +83,6 @@ PrefabInstance:
 --- !u!4 &4660581643024996034 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5079572542869508417, guid: b3e6be9d42be156428b39403814983a8, type: 3}
-  m_PrefabInstance: {fileID: 492002999735322499}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &5590895560220915900 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5423789691744829247, guid: b3e6be9d42be156428b39403814983a8, type: 3}
   m_PrefabInstance: {fileID: 492002999735322499}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2942518606130375955

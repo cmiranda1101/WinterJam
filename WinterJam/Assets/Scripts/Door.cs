@@ -71,11 +71,13 @@ public class Door : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            /*
             CheckEnemiesAlive();
             if (enemiesAlive <= 0)
             {
                 GoToNextRoom();
             }
+            */
             GoToNextRoom();
         }
     }

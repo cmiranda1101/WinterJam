@@ -7,7 +7,7 @@ using UnityEditor;
 public class LevelGenerator : MonoBehaviour
 {
     [SerializeField] GameObject[] rooms;
-    public int numberOfRoomsToGenerate;
+    public int numberOfRoomsToGenerate; //The number of rooms that will be generated in the level. Does not include the starting room
 
     GameObject player;
 
@@ -27,18 +27,27 @@ public class LevelGenerator : MonoBehaviour
     void GenerateStartingRoom()
     {
         GameObject roomToSpawn = rooms[Random.Range(0, rooms.Length)];
+        GameObject childWithTag;
+        for (int i = 0; i < roomToSpawn.transform.childCount; i++)
+        {
+            childWithTag = roomToSpawn.transform.GetChild(i).gameObject;
+            if (childWithTag.tag == "Door")
+            {
+                childWithTag.SetActive(true);
+            }
+        }
         Instantiate(roomToSpawn, new Vector3(0, 0, 0), Quaternion.identity);
-        numberOfRoomsToGenerate--;
     }
 
     public void GenerateRoom(Vector3 _roomSpawnPos)
     {
         GameObject roomToSpawn = rooms[Random.Range(0, rooms.Length)];
+        GameObject roomInstance = Instantiate(roomToSpawn, _roomSpawnPos, Quaternion.identity);
         GameObject childWithTag;
         List<GameObject> doors = new List<GameObject>();
-        for (int i = 0; i < roomToSpawn.transform.childCount; i++)
+        for (int i = 0; i < roomInstance.transform.childCount; i++)
         {
-            childWithTag = roomToSpawn.transform.GetChild(i).gameObject;
+            childWithTag = roomInstance.transform.GetChild(i).gameObject;
             if (childWithTag.tag == "Door")
             {
                 doors.Add(childWithTag);
@@ -47,23 +56,19 @@ public class LevelGenerator : MonoBehaviour
         }
         int numberOfDoorsToSpawn = Random.Range(2, doors.Count);
         GameObject doorPlayerEntered = FindDoorPlayerEntered(doors);
+        Debug.Log(doorPlayerEntered);
+        Debug.Log(doorPlayerEntered.transform.position);
         doorPlayerEntered.SetActive(true);
-        List<GameObject> doorsNotSpawned = doors;
-        for (int i = 0; i < doorsNotSpawned.Count; i++)
-        {
-            if (doorsNotSpawned[i] == doorPlayerEntered)
-            {
-                doorsNotSpawned.Remove(doorsNotSpawned[i]);
-            }
-        }
+        List<GameObject> doorsNotSpawned = new List<GameObject>(doors);
+        doorsNotSpawned.RemoveAll(d => d.activeSelf);
+        numberOfDoorsToSpawn--;
         SpawnRandomDoor(doorsNotSpawned, numberOfDoorsToSpawn);
-        Instantiate(roomToSpawn, _roomSpawnPos, Quaternion.identity);
         numberOfRoomsToGenerate--;   
     }
 
     GameObject FindDoorPlayerEntered(List<GameObject> _doorsInRoom)
     {
-        GameObject doorPlayerEntered = new GameObject();
+        GameObject doorPlayerEntered = null;
         float distanceFromPlayer = 0;
         float smallestDistance = 999999;
         for (int i = 0; i < _doorsInRoom.Count; i++)
@@ -80,10 +85,10 @@ public class LevelGenerator : MonoBehaviour
 
     void SpawnRandomDoor(List<GameObject> _doorsNotSpawned, int _numberOfDoorsToSpawn)
     {
-        int doorToSpawn = Random.Range(1, _doorsNotSpawned.Count);
+        int doorToSpawn = Random.Range(0, _doorsNotSpawned.Count);
         Debug.Log(doorToSpawn);
         Debug.Log(_doorsNotSpawned.Count);
-        _doorsNotSpawned[doorToSpawn - 1].SetActive(true);
+        _doorsNotSpawned[doorToSpawn].SetActive(true);
         _doorsNotSpawned.Remove(_doorsNotSpawned[doorToSpawn]);
         _numberOfDoorsToSpawn--;
         if (_numberOfDoorsToSpawn > 0)
