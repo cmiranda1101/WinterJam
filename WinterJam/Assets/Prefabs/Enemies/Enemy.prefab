@@ -68,7 +68,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyController
   navMeshAgent: {fileID: 2242791293931060250}
   behaviorGraphAgent: {fileID: 4057234414777791027}
-  isMoving: 0
 --- !u!114 &4057234414777791027
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -200,8 +199,8 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
+  m_UseGravity: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
