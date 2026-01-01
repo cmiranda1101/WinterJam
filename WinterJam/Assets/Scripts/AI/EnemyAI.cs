@@ -25,6 +25,7 @@ public class EnemyAI : MonoBehaviour
     {
     }
 
+    //Initialize blackboard variables for the behavior graph
     public void InitializeBehaviorGraph()
     {
         behaviorGraphAgent.BlackboardReference.SetVariableValue("self", gameObject);

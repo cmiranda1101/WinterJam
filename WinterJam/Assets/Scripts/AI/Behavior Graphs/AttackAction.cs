@@ -29,10 +29,12 @@ public partial class AttackAction : Action
     protected override Status OnUpdate()
     {
         timer += Time.deltaTime;
-        if(inCover == true)
+        //If in cover, attack from cover (not implemented yet)
+        if (inCover == true)
         {
 
         }
+        //If not in cover, move towards player if too far, or else strafe around them
         else
         {
             Vector3 distanceToPlayer = Agent.Value.transform.position - Player.Value.transform.position;
@@ -42,8 +44,10 @@ public partial class AttackAction : Action
             {
                 EnemyController.Value.SetDestination(Player.Value.transform.position);
             }
+            //If within range, strafe
             else
             {
+                //If times is less than strafe time, strafe
                 if (timer < strafeTimer)
                 {
                     //strafe around player in a half-circle
@@ -54,11 +58,13 @@ public partial class AttackAction : Action
                     EnemyController.Value.SetDestination(strafePosition);
                     _ = EnemyController.Value.RotateTowardsPlayer(Player.Value.transform.position);
                 }
+                //If timer is greater than strafe time but less than pause time, stop moving and face player
                 else if (timer > strafeTimer && timer < strafeTimer + pauseTimer)
                 {
                     EnemyController.Value.SetDestination(Agent.Value.transform.position); //stop moving
                     _ = EnemyController.Value.RotateTowardsPlayer(Player.Value.transform.position);
                 }
+                //If timer is greater than strafe time and pause time, reset timer and change the strafe direction
                 else
                 {
                     timer = 0f;

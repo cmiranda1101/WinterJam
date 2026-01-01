@@ -42,19 +42,24 @@ public partial class GetCoverAction : Action
             Debug.LogWarning("GetCoverAction.cs: EnemyAI component not found on Agent.");
             return Status.Failure;
         }
+        //Check if the agent has reached its destination
         if(!Controller.Value.navMeshAgent.pathPending && Controller.Value.navMeshAgent.remainingDistance <= Controller.Value.navMeshAgent.stoppingDistance)
         {
             isMoving.Value = false;
         }
-        if(isMoving.Value)
+        //If the agent is still moving towards cover, return running
+        if (isMoving.Value)
         {
             return Status.Running;
         }
+        //If the agent does not have a current cover, find the closest available cover
         else if (CurrentCover.Value == null)
         {
+            //Find the closest available cover
             foreach (var cover in Cover.Value.coverObjects)
             {
-                if(cover.Value != CoverState.Empty) { continue; }
+                //Skip occupied or reserved cover
+                if (cover.Value != CoverState.Empty) { continue; }
 
                 distanceToCover = cover.Key.transform.position - Agent.Value.transform.position;
                 if (closestCoverPosition == Vector3.zero ||
@@ -65,6 +70,7 @@ public partial class GetCoverAction : Action
                 }
             }
             
+            //If found available cover, move to it and reserve it
             if(CurrentCover.Value != null)
             {
                 Controller.Value.SetDestination(closestCoverPosition);
@@ -72,12 +78,14 @@ public partial class GetCoverAction : Action
                 Cover.Value.coverObjects[CurrentCover.Value] = CoverState.Reserved;
                 return Status.Running;
             }
+            //If no available cover, switch to attack state
             else if(CurrentCover.Value == null)
             {
                 Enemy.Value.behaviorGraphAgent.SetVariableValue("AIState", AIState.Attack);
                 return Status.Success;
             }
         }
+        //If the agent has reached the cover, set state to attack, face the player, and mark cover as occupied
         else if (CurrentCover.Value != null && !isMoving.Value)
         {
             Enemy.Value.behaviorGraphAgent.SetVariableValue("inCover", true);
