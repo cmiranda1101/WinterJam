@@ -5,6 +5,7 @@ public class EnemyAI : MonoBehaviour
 {
     [SerializeField] public BehaviorGraphAgent behaviorGraphAgent;
     [SerializeField] public EnemyController enemyController;
+    [SerializeField] public EnemyAnimator enemyAnimator;
     [HideInInspector] public CoverObjects coverObjects;
 
     GameObject player;
@@ -23,6 +24,7 @@ public class EnemyAI : MonoBehaviour
 
     void Update()
     {
+        enemyAnimator.SetAnimationSpeed();
     }
 
     //Initialize blackboard variables for the behavior graph
@@ -34,5 +36,6 @@ public class EnemyAI : MonoBehaviour
         behaviorGraphAgent.BlackboardReference.SetVariableValue("EnemyController", enemyController);
         behaviorGraphAgent.BlackboardReference.SetVariableValue("CoverObjects", coverObjects);
         behaviorGraphAgent.BlackboardReference.SetVariableValue("isInitialized", true);
+        behaviorGraphAgent.BlackboardReference.SetVariableValue("EnemyAnimator", enemyAnimator);
     }
 }

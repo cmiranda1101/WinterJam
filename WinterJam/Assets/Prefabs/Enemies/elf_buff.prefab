@@ -1219,10 +1219,12 @@ GameObject:
   - component: {fileID: -7199742399173542715}
   - component: {fileID: -8256507533991118746}
   - component: {fileID: -5935059452167155821}
+  - component: {fileID: 2520151867828938983}
   - component: {fileID: 9023220854141266364}
   - component: {fileID: 76073122643801604}
   - component: {fileID: -7175281494710148549}
   - component: {fileID: -9198854526307422410}
+  - component: {fileID: -4105845942546143372}
   m_Layer: 0
   m_Name: elf_buff
   m_TagString: Enemy
@@ -1274,6 +1276,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyAI
   behaviorGraphAgent: {fileID: 9023220854141266364}
   enemyController: {fileID: -5935059452167155821}
+  enemyAnimator: {fileID: 2520151867828938983}
   coverObjects: {fileID: 0}
 --- !u!114 &-5935059452167155821
 MonoBehaviour:
@@ -1291,7 +1294,21 @@ MonoBehaviour:
   behaviorGraphAgent: {fileID: 9023220854141266364}
   speed: 5
   angleThreshold: 3
-  rotSpeed: 5
+  rotSpeed: 7
+--- !u!114 &2520151867828938983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5191083252983211152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aefc4a833f2d1974aa52146640a90562, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyAnimator
+  animator: {fileID: -4105845942546143372}
+  navMeshAgent: {fileID: -9198854526307422410}
 --- !u!114 &9023220854141266364
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1393,6 +1410,28 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!95 &-4105845942546143372
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5191083252983211152}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 4d32549493d300d4db8a95d9e69f7084, type: 3}
+  m_Controller: {fileID: 9100000, guid: d9708f62881cd794484374af63adb675, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &5486355492507382619
 GameObject:
   m_ObjectHideFlags: 0
