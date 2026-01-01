@@ -5,11 +5,12 @@ using Action = Unity.Behavior.Action;
 using Unity.Properties;
 
 [Serializable, GeneratePropertyBag]
-[NodeDescription(name: "PatrolArea", story: "[Agent] patrols in a random area using [Controller]", category: "Action", id: "22fac30b3fa5689a60d79cec6643c797")]
+[NodeDescription(name: "PatrolArea", story: "[Agent] patrols in a random area using [Controller] sets [Animator]", category: "Action", id: "22fac30b3fa5689a60d79cec6643c797")]
 public partial class PatrolAreaAction : Action
 {
     [SerializeReference] public BlackboardVariable<GameObject> Agent;
     [SerializeReference] public BlackboardVariable<EnemyController> Controller;
+    [SerializeReference] public BlackboardVariable<EnemyAnimator> Animator;
     
     protected override Status OnStart()
     {
@@ -25,6 +26,7 @@ public partial class PatrolAreaAction : Action
         }
         else
         {
+            Animator.Value.SetAnimationBool("isStrafe", false);
             return Controller.Value.PatrolArea();
         }
     }
