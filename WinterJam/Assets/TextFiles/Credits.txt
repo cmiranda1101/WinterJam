@@ -1,8 +1,16 @@
 Credits:
 
 Audio-
-
-
+Main Music - Snow Drifts In Memphis from stocktune
+Nox_Sound from UnityAsset Store
+Julien Matthey from ZapSplat
+ZapSplat from ZapSplat
+JJBinx from Pixabay
+zennnsounds from Pixabay
+Mollyroselee from Pixabay
+Aman Kumar from Pixabay
+freesound_community from Pixabay
+konpeito_sound from Pixabay
 
 Models-
 
