@@ -28,6 +28,7 @@ public class EnemyAI : MonoBehaviour
     public void InitializeBehaviorGraph()
     {
         behaviorGraphAgent.BlackboardReference.SetVariableValue("self", gameObject);
+        behaviorGraphAgent.BlackboardReference.SetVariableValue("Player", player);
         behaviorGraphAgent.BlackboardReference.SetVariableValue("EnemyAI", this);
         behaviorGraphAgent.BlackboardReference.SetVariableValue("EnemyController", enemyController);
         behaviorGraphAgent.BlackboardReference.SetVariableValue("CoverObjects", coverObjects);

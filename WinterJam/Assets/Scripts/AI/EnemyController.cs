@@ -9,6 +9,11 @@ public class EnemyController : MonoBehaviour
     [SerializeField] public NavMeshAgent navMeshAgent;
     [SerializeField] BehaviorGraphAgent behaviorGraphAgent;
 
+    //Variables for movement
+    [SerializeField] private float angleThreshold;
+    [SerializeField] private float rotSpeed;
+    private Quaternion targetRotation;
+
     BlackboardVariable<bool> isMoving;
 
     void Start()
@@ -47,5 +52,15 @@ public class EnemyController : MonoBehaviour
         {
             navMeshAgent.SetDestination(hit.position);
         }
+    }
+
+    public Status RotateTowardsPlayer(Vector3 playerPosition)
+    {
+        Vector3 direction = (playerPosition - transform.position).normalized;
+        targetRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotSpeed);
+        
+        float angle = Quaternion.Angle(transform.rotation, targetRotation);
+        return angle <= angleThreshold ? Status.Success : Status.Running;
     }
 }
