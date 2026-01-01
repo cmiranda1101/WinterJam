@@ -1289,6 +1289,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyController
   navMeshAgent: {fileID: -9198854526307422410}
   behaviorGraphAgent: {fileID: 9023220854141266364}
+  speed: 5
   angleThreshold: 3
   rotSpeed: 5
 --- !u!114 &9023220854141266364

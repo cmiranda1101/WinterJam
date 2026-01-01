@@ -10,6 +10,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField] BehaviorGraphAgent behaviorGraphAgent;
 
     //Variables for movement
+    [SerializeField] public float speed;
     [SerializeField] private float angleThreshold;
     [SerializeField] private float rotSpeed;
     private Quaternion targetRotation;
@@ -18,6 +19,7 @@ public class EnemyController : MonoBehaviour
 
     void Start()
     {
+        navMeshAgent.speed = speed;
     }
 
     public Status PatrolArea()
