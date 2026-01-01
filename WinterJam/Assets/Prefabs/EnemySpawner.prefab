@@ -46,7 +46,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyPlacer
   terrainGenerator: {fileID: 0}
   objectsToPlace:
-  - {fileID: 3054273620231127691, guid: 13a1ef6f98d8b4d4796e96450cd93d53, type: 3}
+  - {fileID: 5191083252983211152, guid: f41d74db1558c5c41b025f25183d64a9, type: 3}
+  - {fileID: 7198887204697539406, guid: 328c6eb1883b7e6458b327ede1ca9643, type: 3}
   objectDensity: 3
   maxHeight: 20
   xBoundOffset: 5

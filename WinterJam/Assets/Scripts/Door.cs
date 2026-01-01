@@ -55,7 +55,6 @@ public class Door : MonoBehaviour
     bool CheckIfRoomExists(Vector3 _posToCheck)
     {
         bool doesRoomExist = false;
-        Debug.Log(_posToCheck);
         _posToCheck.y = 20;
         RaycastHit hit;
         if (Physics.Raycast(_posToCheck, Vector3.down, out hit))
@@ -70,14 +69,16 @@ public class Door : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.tag);
         if (other.CompareTag("Player"))
         {
+            /*
             CheckEnemiesAlive();
             if (enemiesAlive <= 0)
             {
                 GoToNextRoom();
             }
+            */
+            GoToNextRoom();
         }
     }
 }

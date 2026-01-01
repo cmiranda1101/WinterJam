@@ -5,10 +5,11 @@ using Action = Unity.Behavior.Action;
 using Unity.Properties;
 
 [Serializable, GeneratePropertyBag]
-[NodeDescription(name: "GetCover", story: "[Agent] Finds [Cover] Using [Controller] Sets [EnemyAI] State And [CurrentCover] Checks If [isMoving]", category: "Action", id: "7d8b01d4633862f629200e92a85113d8")]
+[NodeDescription(name: "GetCover", story: "[Agent] Finds [Cover] Using [Controller] Sets [EnemyAI] State And [CurrentCover] And Faces [Player] Checks If [isMoving]", category: "Action", id: "7d8b01d4633862f629200e92a85113d8")]
 public partial class GetCoverAction : Action
 {
     [SerializeReference] public BlackboardVariable<GameObject> Agent;
+    [SerializeReference] public BlackboardVariable<PlayerController> Player;
     [SerializeReference] public BlackboardVariable<CoverObjects> Cover;
     [SerializeReference] public BlackboardVariable<EnemyController> Controller;
     [SerializeReference] public BlackboardVariable<EnemyAI> Enemy;
@@ -41,19 +42,24 @@ public partial class GetCoverAction : Action
             Debug.LogWarning("GetCoverAction.cs: EnemyAI component not found on Agent.");
             return Status.Failure;
         }
+        //Check if the agent has reached its destination
         if(!Controller.Value.navMeshAgent.pathPending && Controller.Value.navMeshAgent.remainingDistance <= Controller.Value.navMeshAgent.stoppingDistance)
         {
             isMoving.Value = false;
         }
-        if(isMoving.Value)
+        //If the agent is still moving towards cover, return running
+        if (isMoving.Value)
         {
             return Status.Running;
         }
+        //If the agent does not have a current cover, find the closest available cover
         else if (CurrentCover.Value == null)
         {
+            //Find the closest available cover
             foreach (var cover in Cover.Value.coverObjects)
             {
-                if(cover.Value != CoverState.Empty) { continue; }
+                //Skip occupied or reserved cover
+                if (cover.Value != CoverState.Empty) { continue; }
 
                 distanceToCover = cover.Key.transform.position - Agent.Value.transform.position;
                 if (closestCoverPosition == Vector3.zero ||
@@ -64,6 +70,7 @@ public partial class GetCoverAction : Action
                 }
             }
             
+            //If found available cover, move to it and reserve it
             if(CurrentCover.Value != null)
             {
                 Controller.Value.SetDestination(closestCoverPosition);
@@ -71,17 +78,20 @@ public partial class GetCoverAction : Action
                 Cover.Value.coverObjects[CurrentCover.Value] = CoverState.Reserved;
                 return Status.Running;
             }
+            //If no available cover, switch to attack state
             else if(CurrentCover.Value == null)
             {
                 Enemy.Value.behaviorGraphAgent.SetVariableValue("AIState", AIState.Attack);
                 return Status.Success;
             }
         }
+        //If the agent has reached the cover, set state to attack, face the player, and mark cover as occupied
         else if (CurrentCover.Value != null && !isMoving.Value)
         {
             Enemy.Value.behaviorGraphAgent.SetVariableValue("inCover", true);
             Enemy.Value.behaviorGraphAgent.SetVariableValue("AIState", AIState.Attack);
-            return Status.Success;
+            Cover.Value.coverObjects[CurrentCover.Value] = CoverState.Occupied;
+            return Controller.Value.RotateTowardsPlayer(Player.Value.transform.position);
         }
         return Status.Running;
     }

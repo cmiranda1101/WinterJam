@@ -9,6 +9,7 @@ TagManager:
   - Cover
   - ObjectPlacer
   - LevelGenerator
+  - Door
   layers:
   - Default
   - TransparentFX
