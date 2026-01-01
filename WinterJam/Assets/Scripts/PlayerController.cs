@@ -7,9 +7,11 @@ public class PlayerController : MonoBehaviour, IDamage
     private PlayerControls controls;
     private CharacterController controller;
     private Camera playerCam;
+    private Animator playerAnim;
     private float pitch;
     private float targetHealthRatio;
 
+    [SerializeField] private float animTransSmoothness; // Bigger is smoother
     [SerializeField] private float moveSpeed;
     [SerializeField] private float turnSpeed;
     [SerializeField] private float minPitchAngle;
@@ -24,6 +26,7 @@ public class PlayerController : MonoBehaviour, IDamage
     {
         controller = GetComponent<CharacterController>();   // Get Character Controller
         playerCam = GetComponentInChildren<Camera>();       // Get Camera
+        playerAnim = GetComponent<Animator>();
 
         pitch = 0.0f;
     }
@@ -70,10 +73,19 @@ public class PlayerController : MonoBehaviour, IDamage
 
     void movePlayer()
     {
+        // Player Movement
         Vector2 input = controls.Player.Move.ReadValue<Vector2>();  // Grab move input
         Vector3 move = new Vector3(input.x, 0, input.y);
         move = transform.TransformDirection(move);                  // Transform dir from local to world //Relative to look pos
         controller.Move(move * moveSpeed * Time.deltaTime);
+
+        // Set Anim Parameters
+        Vector3 animMove = transform.InverseTransformDirection(move); // Bring back to local for anims
+        playerAnim.SetFloat("MoveX", animMove.x, animTransSmoothness, Time.deltaTime);
+        playerAnim.SetFloat("MoveY", animMove.z, animTransSmoothness, Time.deltaTime);
+        // Speed Param
+        float speed = Mathf.Clamp01(animMove.magnitude);
+        playerAnim.SetFloat("Speed", speed, animTransSmoothness, Time.deltaTime);
     }
 
     void Look()
