@@ -18,9 +18,17 @@ public class PlayerController : MonoBehaviour, IDamage
     [SerializeField] private float maxPitchAngle;
     [SerializeField] private float maxHealth;
     [SerializeField] private float healthUpdateSpeed;
+    [SerializeField] private AudioSource playerWalkSource;
+    [SerializeField] private AudioSource playerVocalSource;
+    [SerializeField] private AudioSource playerOtherSource;
+    [SerializeField] private Transform leftFoot;
+    [SerializeField] private Transform rightFoot;
+    [SerializeField] private LayerMask groundMask;
 
     [ReadOnly] public float health;
     public bool isDead { get; private set; }
+    private bool leftDown;
+    private bool rightDown;
 
     private void Awake()
     {
@@ -69,6 +77,7 @@ public class PlayerController : MonoBehaviour, IDamage
         HandleDamage();
         movePlayer();
         Look();
+        PlayWalkSound();
     }
 
     void movePlayer()
@@ -122,4 +131,34 @@ public class PlayerController : MonoBehaviour, IDamage
         GameManager.instance.playerHealth.fillAmount = Mathf.Lerp(currRatio, targetHealthRatio, Time.deltaTime * healthUpdateSpeed);
     }
 
+    // Audio Functions
+    void PlayWalkSound()
+    {
+        CheckFootStep(leftFoot, ref leftDown);
+        CheckFootStep(rightFoot, ref rightDown);
+    }
+
+    void PlayHurtSound()
+    {
+        GameManager.audioManager.PlayHurt(playerVocalSource);
+    }
+
+    void PlayMeleeSound()
+    {
+        GameManager.audioManager.PlayMelee(playerVocalSource);
+    }
+
+    void PlayEffortSound()
+    {
+        GameManager.audioManager.PlayAcrobatics(playerVocalSource);
+    }
+
+    void CheckFootStep(Transform foot, ref bool footDown)
+    {
+        bool isDown = Physics.Raycast(foot.position, Vector3.down, 0.2f, groundMask);
+
+        if (isDown && !footDown) // If foot is down and it wasn't prior. Stops duplicat sound on frames
+            GameManager.audioManager.PlayMovement(playerWalkSource);
+        footDown = isDown;
+    }
 }

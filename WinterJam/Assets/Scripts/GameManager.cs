@@ -39,7 +39,6 @@ public class GameManager : MonoBehaviour
         menueQueue = new Stack<GameObject>();
         isPaused = false;
         isDead = false;
-
     }
 
     private void Start()
@@ -51,6 +50,14 @@ public class GameManager : MonoBehaviour
         pauseMenu.SetActive(false);
         SettingsMenu.SetActive(false);
         ControlsMenu.SetActive(false);
+    }
+
+    private void Update()
+    {
+        if(!audioManager.musicSource.isPlaying)
+        {
+            audioManager.PlayMusic();
+        }
     }
 
     private void OnEnable()

@@ -17,7 +17,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioClip weaponPickup;
     [SerializeField] private AudioClip menuSound;
 
-    [SerializeField] private AudioSource musicSource;
+    public AudioSource musicSource;
 
     public float musicVolume { get; private set; }
     public float sfxVolume { get; private set; }
