@@ -9,6 +9,7 @@ using Unity.Properties;
 public partial class ReloadAction : Action
 {
     [SerializeReference] public BlackboardVariable<GameObject> Agent;
+    [SerializeReference] public BlackboardVariable<EnemyAI> EnemyAI;
 
     protected override Status OnStart()
     {
