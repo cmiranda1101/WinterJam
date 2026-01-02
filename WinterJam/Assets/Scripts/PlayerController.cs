@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour, IDamage
     private Animator playerAnim;
     private float pitch;
     private float targetHealthRatio;
+    private IceEffect iceEffectScript;
 
     [SerializeField] private float animTransSmoothness; // Bigger is smoother
     [SerializeField] private float moveSpeed;
@@ -35,6 +36,7 @@ public class PlayerController : MonoBehaviour, IDamage
         controller = GetComponent<CharacterController>();   // Get Character Controller
         playerCam = GetComponentInChildren<Camera>();       // Get Camera
         playerAnim = GetComponent<Animator>();
+        iceEffectScript = GetComponent<IceEffect>();
 
         pitch = 0.0f;
     }
@@ -116,10 +118,7 @@ public class PlayerController : MonoBehaviour, IDamage
 
         if (health == 0)
         {
-            GameManager.instance.HUD.SetActive(false);
-            GameManager.instance.isDead = true;
-            controls.Player.Disable();
-            isDead = true;
+            HandleDeath();
         }
     }
 
@@ -129,6 +128,15 @@ public class PlayerController : MonoBehaviour, IDamage
         if (Mathf.Approximately(currRatio, targetHealthRatio)) return;
 
         GameManager.instance.playerHealth.fillAmount = Mathf.Lerp(currRatio, targetHealthRatio, Time.deltaTime * healthUpdateSpeed);
+    }
+
+    void HandleDeath()
+    {
+        GameManager.instance.HUD.SetActive(false);
+        controls.Player.Disable();
+        isDead = true;
+        iceEffectScript.SpawnIceBlock();
+        // Set Anim Param dead
     }
 
     // Audio Functions

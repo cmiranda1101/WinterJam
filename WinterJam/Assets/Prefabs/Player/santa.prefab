@@ -540,6 +540,7 @@ GameObject:
   - component: {fileID: 2436033024483653883}
   - component: {fileID: 2791573921195826794}
   - component: {fileID: 766177119740127011}
+  - component: {fileID: 8782563226170199970}
   - component: {fileID: 4224271578703730153}
   - component: {fileID: 4126011640238697677}
   - component: {fileID: 3204809104240659109}
@@ -623,6 +624,23 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &8782563226170199970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1707280832393365521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 028fb96a75289984bb3874d9298f483f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::IceEffect
+  iceBlock: {fileID: 7554915445531454780, guid: 4f811e6ae303b23449549d863efe5659, type: 3}
+  iceMats:
+  - {fileID: 2100000, guid: 4726dff4cff57a24ca896214d4885bbc, type: 2}
+  - {fileID: 2100000, guid: 34eeaea4050d71b48ab0347301254d75, type: 2}
+  - {fileID: 2100000, guid: e60ed90299703bf42958a8d05ebaeda2, type: 2}
 --- !u!114 &4224271578703730153
 MonoBehaviour:
   m_ObjectHideFlags: 0

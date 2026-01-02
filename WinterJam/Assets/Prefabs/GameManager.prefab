@@ -2093,7 +2093,6 @@ MonoBehaviour:
   playerHealth: {fileID: 7929330022147277756}
   playerStamina: {fileID: 6306252569721718040}
   isPaused: 0
-  isDead: 0
 --- !u!114 &819498275136373165
 MonoBehaviour:
   m_ObjectHideFlags: 0
