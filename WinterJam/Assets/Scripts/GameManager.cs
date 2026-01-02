@@ -18,11 +18,9 @@ public class GameManager : MonoBehaviour
     public Image playerHealth;
     public Image playerStamina;
     public bool isPaused;
-    public bool isDead;
 
     public static GameManager instance { get; private set; }
     public static AudioManager audioManager {get; private set;}
-
 
 
     private void Awake()
@@ -38,8 +36,6 @@ public class GameManager : MonoBehaviour
         controls = new PlayerControls();
         menueQueue = new Stack<GameObject>();
         isPaused = false;
-        isDead = false;
-
     }
 
     private void Start()
@@ -51,6 +47,14 @@ public class GameManager : MonoBehaviour
         pauseMenu.SetActive(false);
         SettingsMenu.SetActive(false);
         ControlsMenu.SetActive(false);
+    }
+
+    private void Update()
+    {
+        if(!audioManager.musicSource.isPlaying)
+        {
+            audioManager.PlayMusic();
+        }
     }
 
     private void OnEnable()

@@ -125,5 +125,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6be877c83f246a49903c4bebec8e6c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DEBUG_DAMAGEBLOCK
-  testDamage: 3.5
+  testDamage: 10
   col: {fileID: 0}
