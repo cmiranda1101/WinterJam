@@ -1,16 +1,18 @@
 using UnityEngine;
 using Unity.Behavior;
 
-public class EnemyAI : MonoBehaviour
+public class EnemyAI : MonoBehaviour, IDamage
 {
     [SerializeField] public BehaviorGraphAgent behaviorGraphAgent;
     [SerializeField] public EnemyController enemyController;
     [SerializeField] public EnemyAnimator enemyAnimator;
     [SerializeField] public EnemyWeapon enemyWeapon;
+    [SerializeField] public IceEffect enemyEffect;
     [HideInInspector] public CoverObjects coverObjects;
 
     GameObject player;
 
+    [SerializeField] public float health;
     void Awake()
     {
         behaviorGraphAgent.Init();
@@ -36,5 +38,17 @@ public class EnemyAI : MonoBehaviour
         behaviorGraphAgent.BlackboardReference.SetVariableValue("EnemyAI", this);
         behaviorGraphAgent.BlackboardReference.SetVariableValue("CoverObjects", coverObjects);
         behaviorGraphAgent.BlackboardReference.SetVariableValue("isInitialized", true);
+    }
+
+    public void TakeDamage(float amount)
+    {
+        health -= amount;
+        if (health <= 0)
+        {
+            enemyController.navMeshAgent.SetDestination(transform.position);
+            enemyAnimator.SetAnimationBool("isDead", true);
+            behaviorGraphAgent.SetVariableValue("AIState", AIState.Dead);
+            enemyEffect.SpawnIceBlock();
+        }
     }
 }

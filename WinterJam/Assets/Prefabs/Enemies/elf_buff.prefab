@@ -1221,6 +1221,7 @@ GameObject:
   - component: {fileID: -5935059452167155821}
   - component: {fileID: 3938019520043845967}
   - component: {fileID: 2520151867828938983}
+  - component: {fileID: -445054487424132336}
   - component: {fileID: 9023220854141266364}
   - component: {fileID: 76073122643801604}
   - component: {fileID: -7175281494710148549}
@@ -1279,7 +1280,9 @@ MonoBehaviour:
   enemyController: {fileID: -5935059452167155821}
   enemyAnimator: {fileID: 2520151867828938983}
   enemyWeapon: {fileID: 3938019520043845967}
+  enemyEffect: {fileID: -445054487424132336}
   coverObjects: {fileID: 0}
+  health: 1
 --- !u!114 &-5935059452167155821
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1313,6 +1316,7 @@ MonoBehaviour:
   muzzleVelocity: 1000
   muzzle: {fileID: 2406392209231004110}
   shootTimer: 2
+  maxRange: 30
 --- !u!114 &2520151867828938983
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1327,6 +1331,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyAnimator
   animator: {fileID: -4105845942546143372}
   navMeshAgent: {fileID: -9198854526307422410}
+--- !u!114 &-445054487424132336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5191083252983211152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 028fb96a75289984bb3874d9298f483f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::IceEffect
+  iceBlock: {fileID: 7554915445531454780, guid: 4f811e6ae303b23449549d863efe5659, type: 3}
+  iceMats:
+  - {fileID: 2100000, guid: 4726dff4cff57a24ca896214d4885bbc, type: 2}
+  - {fileID: 2100000, guid: 34eeaea4050d71b48ab0347301254d75, type: 2}
+  - {fileID: 2100000, guid: e60ed90299703bf42958a8d05ebaeda2, type: 2}
 --- !u!114 &9023220854141266364
 MonoBehaviour:
   m_ObjectHideFlags: 0

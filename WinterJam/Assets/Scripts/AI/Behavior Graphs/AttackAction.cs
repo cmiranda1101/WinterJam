@@ -5,13 +5,14 @@ using Action = Unity.Behavior.Action;
 using Unity.Properties;
 
 [Serializable, GeneratePropertyBag]
-[NodeDescription(name: "Attack", story: "[Agent]/[EnemyAI] Attacks [Player] if [inCover] Or Freeroaming", category: "Action", id: "a7d91e9cbf2c124024f9f5a96a3c45e2")]
+[NodeDescription(name: "Attack", story: "[Agent]/[EnemyAI] Attacks [Player] if [inCover] Or Freeroaming Checks [isDead]", category: "Action", id: "a7d91e9cbf2c124024f9f5a96a3c45e2")]
 public partial class AttackAction : Action
 {
     [SerializeReference] public BlackboardVariable<GameObject> Agent;
     [SerializeReference] public BlackboardVariable<EnemyAI> Enemy;
     [SerializeReference] public BlackboardVariable<GameObject> Player;
     [SerializeReference] public BlackboardVariable<bool> inCover;
+    [SerializeReference] public BlackboardVariable<bool> isDead;
     private float timer = 0f;
     private float strafeTimer = 0f;
     private float pauseTimer = 0f;
@@ -19,8 +20,8 @@ public partial class AttackAction : Action
     private float radius = 0f;
     protected override Status OnStart()
     {
-        pauseTimer = UnityEngine.Random.Range(0f, 3f);
-        strafeTimer = UnityEngine.Random.Range(0f, 4f);
+        pauseTimer = UnityEngine.Random.Range(0.8f, 3f);
+        strafeTimer = UnityEngine.Random.Range(0.8f, 4f);
         targetAngle = UnityEngine.Random.Range(-90f, 90f);
         radius = UnityEngine.Random.Range(15f, 30f);
         return Status.Running;
@@ -28,6 +29,11 @@ public partial class AttackAction : Action
 
     protected override Status OnUpdate()
     {
+        if(Enemy.Value.health <= 0)
+        {
+            Enemy.Value.enemyController.navMeshAgent.SetDestination(Agent.Value.transform.position);
+            return Status.Failure;
+        }
         timer += Time.deltaTime;
         //If in cover, attack from cover (not implemented yet)
         if (inCover == true)
@@ -69,7 +75,7 @@ public partial class AttackAction : Action
                     Enemy.Value.enemyAnimator.SetAnimationBool("isStrafe", false);
                     Enemy.Value.enemyController.SetDestination(Agent.Value.transform.position); //stop moving
                     _ = Enemy.Value.enemyController.RotateTowardsPlayer(Player.Value.transform.position);
-                    Enemy.Value.enemyWeapon.Shoot();
+                    Enemy.Value.enemyWeapon.Shoot(Player.Value.transform);
                 }
                 //If timer is greater than strafe time and pause time, reset timer and change the strafe direction
                 else
