@@ -20,8 +20,8 @@ public partial class AttackAction : Action
     private float radius = 0f;
     protected override Status OnStart()
     {
-        pauseTimer = UnityEngine.Random.Range(1, 4);
-        strafeTimer = UnityEngine.Random.Range(1, 8);
+        pauseTimer = UnityEngine.Random.Range(0f, 3f);
+        strafeTimer = UnityEngine.Random.Range(0f, 4f);
         targetAngle = UnityEngine.Random.Range(-90f, 90f);
         radius = UnityEngine.Random.Range(15f, 30f);
         return Status.Running;
