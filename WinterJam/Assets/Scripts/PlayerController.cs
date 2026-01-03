@@ -85,11 +85,14 @@ public class PlayerController : MonoBehaviour, IDamage
 
         timer += Time.deltaTime;
 
-        HandleDamage();
-        movePlayer();
-        Look();
-        PlayWalkSound();
-        Shoot();
+        if (!isDead)
+        {
+            HandleDamage();
+            movePlayer();
+            Look();
+            PlayWalkSound();
+            Shoot();
+        }
     }
 
     void movePlayer()
