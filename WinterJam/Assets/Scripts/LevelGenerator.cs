@@ -10,7 +10,9 @@ public class LevelGenerator : MonoBehaviour
     public int numberOfRoomsToGenerate; //The number of rooms that will be generated in the level. Does not include the starting room
 
     GameObject player;
-
+    RoomManager nextRoomManager;
+    int currentGridPosX = 0;
+    int currentGridPosY = 0;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -18,31 +20,37 @@ public class LevelGenerator : MonoBehaviour
         player = GameObject.FindWithTag("Player");
     }
 
-    // Update is called once per frame
-    void Update()
+    void GetRoomManagerScript(GameObject _roomInstance)
     {
-        
+        nextRoomManager = _roomInstance.transform.GetChild(0).GetComponent<RoomManager>(); //room manager should always be the first child of any room
     }
 
     void GenerateStartingRoom()
     {
         GameObject roomToSpawn = rooms[Random.Range(0, rooms.Length)];
+        GameObject startingRoomInstance = Instantiate(roomToSpawn, new Vector3(0, 0, 0), Quaternion.identity);
+        GetRoomManagerScript(startingRoomInstance);
+        nextRoomManager.gridPosX = 0;
+        nextRoomManager.gridPosY = 0;
         GameObject childWithTag;
         for (int i = 0; i < roomToSpawn.transform.childCount; i++)
         {
-            childWithTag = roomToSpawn.transform.GetChild(i).gameObject;
+            childWithTag = startingRoomInstance.transform.GetChild(i).gameObject;
             if (childWithTag.tag == "Door")
             {
                 childWithTag.SetActive(true);
             }
         }
-        Instantiate(roomToSpawn, new Vector3(0, 0, 0), Quaternion.identity);
     }
 
-    public void GenerateRoom(Vector3 _roomSpawnPos)
+    public void GenerateRoom(Vector3 _roomSpawnPos, DoorDirection _directionEnteredFrom)
     {
         GameObject roomToSpawn = rooms[Random.Range(0, rooms.Length)];
         GameObject roomInstance = Instantiate(roomToSpawn, _roomSpawnPos, Quaternion.identity);
+        GetRoomManagerScript(roomInstance);
+        nextRoomManager.UpdateGridPos(currentGridPosX, currentGridPosY, _directionEnteredFrom);
+        currentGridPosX = nextRoomManager.gridPosX;
+        currentGridPosY = nextRoomManager.gridPosY;
         GameObject childWithTag;
         List<GameObject> doors = new List<GameObject>();
         for (int i = 0; i < roomInstance.transform.childCount; i++)
@@ -55,40 +63,45 @@ public class LevelGenerator : MonoBehaviour
             }
         }
         int numberOfDoorsToSpawn = Random.Range(2, doors.Count);
-        GameObject doorPlayerEntered = FindDoorPlayerEntered(doors);
-        Debug.Log(doorPlayerEntered);
-        Debug.Log(doorPlayerEntered.transform.position);
-        doorPlayerEntered.SetActive(true);
-        List<GameObject> doorsNotSpawned = new List<GameObject>(doors);
-        doorsNotSpawned.RemoveAll(d => d.activeSelf);
-        numberOfDoorsToSpawn--;
-        SpawnRandomDoor(doorsNotSpawned, numberOfDoorsToSpawn);
-        numberOfRoomsToGenerate--;   
+        for (int i = 0; i < doors.Count; i++)
+        {
+            nextRoomManager.CheckIfDoorIsInvalid(roomInstance, doors[i].transform.GetChild(1).gameObject);
+        }
+        SpawnEssentialDoors(doors);
+        SpawnRandomDoor(doors, numberOfDoorsToSpawn);
+        //HandleInvalidDoors(doors);
+        numberOfRoomsToGenerate--;
     }
 
-    GameObject FindDoorPlayerEntered(List<GameObject> _doorsInRoom)
+    void SpawnEssentialDoors(List<GameObject> _doorsNotSpawned)
     {
-        GameObject doorPlayerEntered = null;
-        float distanceFromPlayer = 0;
-        float smallestDistance = 999999;
-        for (int i = 0; i < _doorsInRoom.Count; i++)
+        for (int i = 0; i < _doorsNotSpawned.Count; i++)
         {
-            distanceFromPlayer = Vector3.Distance(_doorsInRoom[i].transform.position, player.transform.position);
-            if (distanceFromPlayer < smallestDistance)
+            if (_doorsNotSpawned[i].transform.GetChild(1).GetComponent<Door>().isDoorEssential)
             {
-                smallestDistance = distanceFromPlayer;
-                doorPlayerEntered = _doorsInRoom[i];
+                _doorsNotSpawned[i].SetActive(true);
             }
         }
-        return doorPlayerEntered;
+    }
+
+    void HandleInvalidDoors(List<GameObject> _doors)
+    {
+        for (int i = 0; i < _doors.Count; i++)
+        {
+            if (_doors[i].transform.GetChild(1).GetComponent<Door>().doesNextRoomExist && _doors[i].transform.GetChild(1).GetComponent<Door>().isDoorInvalid)
+            {
+                _doors[i].SetActive(false);
+            }
+        }
     }
 
     void SpawnRandomDoor(List<GameObject> _doorsNotSpawned, int _numberOfDoorsToSpawn)
     {
         int doorToSpawn = Random.Range(0, _doorsNotSpawned.Count);
-        Debug.Log(doorToSpawn);
-        Debug.Log(_doorsNotSpawned.Count);
-        _doorsNotSpawned[doorToSpawn].SetActive(true);
+        if (!_doorsNotSpawned[doorToSpawn].transform.GetChild(1).GetComponent<Door>().isDoorInvalid) //Checks if door leads to a room that does not have a corresponding door
+        {
+            _doorsNotSpawned[doorToSpawn].SetActive(true);
+        }
         _doorsNotSpawned.Remove(_doorsNotSpawned[doorToSpawn]);
         _numberOfDoorsToSpawn--;
         if (_numberOfDoorsToSpawn > 0)
