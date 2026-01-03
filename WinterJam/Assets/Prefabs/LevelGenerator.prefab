@@ -46,4 +46,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LevelGenerator
   rooms:
   - {fileID: 5408868303480010373, guid: b3e6be9d42be156428b39403814983a8, type: 3}
-  numberOfRoomsToGenerate: 1
+  - {fileID: 5603563221306650886, guid: 622af1826194f7b4998c474d16691c33, type: 3}
+  numberOfRoomsToGenerate: 10
