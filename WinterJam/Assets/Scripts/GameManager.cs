@@ -73,7 +73,6 @@ public class GameManager : MonoBehaviour
 
     private void OnPause(InputAction.CallbackContext ctx)
     {
-        if (!playerScript.isDead)
             TogglePause();
     }
 
