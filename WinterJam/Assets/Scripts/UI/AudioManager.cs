@@ -7,7 +7,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioClip[] playerMelee;
     [SerializeField] private AudioClip[] enemyHurtMale;
     [SerializeField] private AudioClip[] EnemyHurtFemale;
-    [SerializeField] private AudioClip[] gunshots;
+    [SerializeField] private AudioClip[] snowballHits;
     [SerializeField] private AudioClip[] playerMovement;
     [SerializeField] private AudioClip[] enemyMovement;
     [SerializeField] private AudioClip[] playerAcrobatics;
@@ -17,12 +17,11 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioClip weaponPickup;
     [SerializeField] private AudioClip menuSound;
 
-    [SerializeField] private AudioSource musicSource;
+    public AudioSource musicSource;
 
-    public float musicVolume;
-    public float sfxVolume;
-
-    private float inMenuVolume;
+    public float musicVolume { get; private set; }
+    public float sfxVolume { get; private set; }
+    public float inMenuVolume {  get; private set; }
 
     private void Start()
     {
@@ -70,7 +69,7 @@ public class AudioManager : MonoBehaviour
 
     public void PlayShoot(AudioSource source)
     {
-        PlayRandom(source, gunshots);
+        PlayRandom(source, snowballHits);
     }
 
     public void PlayMovement(AudioSource source)

@@ -18,6 +18,7 @@ public class MenuBinder : MonoBehaviour
         settingsButton.onClick.AddListener(() => GameManager.instance.buttonFunctions.onSettings());
         controlsButton.onClick.AddListener(() => GameManager.instance.buttonFunctions.onControls());
         exitButton.onClick.AddListener(() => GameManager.instance.buttonFunctions.onExit());
+
         musicSlider.onValueChanged.AddListener((float value) => GameManager.audioManager.SetMusicVolume(value));
         sfxSlider.onValueChanged.AddListener((float value) => GameManager.audioManager.SetSFXVolume(value));
 

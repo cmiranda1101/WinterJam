@@ -6,5 +6,6 @@ public enum AIState
 {
 	GetCover,
 	Reload,
-	Attack
+	Attack,
+	Dead
 }

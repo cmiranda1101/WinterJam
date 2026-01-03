@@ -5,11 +5,11 @@ using Action = Unity.Behavior.Action;
 using Unity.Properties;
 
 [Serializable, GeneratePropertyBag]
-[NodeDescription(name: "PatrolArea", story: "[Agent] patrols in a random area using [Controller]", category: "Action", id: "22fac30b3fa5689a60d79cec6643c797")]
+[NodeDescription(name: "PatrolArea", story: "[Agent]/[EnemyAI] patrols in a random area", category: "Action", id: "22fac30b3fa5689a60d79cec6643c797")]
 public partial class PatrolAreaAction : Action
 {
     [SerializeReference] public BlackboardVariable<GameObject> Agent;
-    [SerializeReference] public BlackboardVariable<EnemyController> Controller;
+    [SerializeReference] public BlackboardVariable<EnemyAI> Enemy;
     
     protected override Status OnStart()
     {
@@ -18,14 +18,15 @@ public partial class PatrolAreaAction : Action
 
     protected override Status OnUpdate()
     {
-        if (Controller.Value == null)
+        if (Enemy.Value == null)
         {
-            Debug.LogWarning("PatrolAreaAction.cs: EnemyController component not found on Agent.");
+            Debug.LogWarning("PatrolAreaAction.cs: EnemyAI component not found on Agent.");
             return Status.Running;
         }
         else
         {
-            return Controller.Value.PatrolArea();
+            Enemy.Value.enemyAnimator.SetAnimationBool("isStrafe", false);
+            return Enemy.Value.enemyController.PatrolArea();
         }
     }
 
