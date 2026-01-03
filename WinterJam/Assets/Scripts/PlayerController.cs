@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour, IDamage
     private float pitch;
     private float targetHealthRatio;
     private IceEffect iceEffectScript;
+    private float timer;
 
     [SerializeField] private float animTransSmoothness; // Bigger is smoother
     [SerializeField] private float moveSpeed;
@@ -25,6 +26,11 @@ public class PlayerController : MonoBehaviour, IDamage
     [SerializeField] private Transform leftFoot;
     [SerializeField] private Transform rightFoot;
     [SerializeField] private LayerMask groundMask;
+    [SerializeField] private float shootRate;
+    [SerializeField] private float SnowballLifeSpan; // Move this to snowball later
+    [SerializeField] private GameObject SnowBall; // copy what was done for iceEffect
+    [SerializeField] private float throwforce; // This will end up being charged for more power
+    [SerializeField] private Transform spawnLocation;
 
     [ReadOnly] public float health;
     public bool isDead { get; private set; }
@@ -48,6 +54,7 @@ public class PlayerController : MonoBehaviour, IDamage
         targetHealthRatio = 1.0f;
         health = maxHealth;
         isDead = false;
+        timer = 0f;
     }
 
     private void OnEnable() // Gaurds against Null Ref other edge cases I hit
@@ -76,10 +83,13 @@ public class PlayerController : MonoBehaviour, IDamage
             return;
         }
 
+        timer += Time.deltaTime;
+
         HandleDamage();
         movePlayer();
         Look();
         PlayWalkSound();
+        Shoot();
     }
 
     void movePlayer()
@@ -168,5 +178,29 @@ public class PlayerController : MonoBehaviour, IDamage
         if (isDown && !footDown) // If foot is down and it wasn't prior. Stops duplicat sound on frames
             GameManager.audioManager.PlayMovement(playerWalkSource);
         footDown = isDown;
+    }
+
+    // Attack Functions
+    public void Shoot()
+    {
+        if (controls.Player.Attack.IsPressed() && timer >= shootRate)
+        {
+            GameObject projectile = Instantiate(SnowBall, spawnLocation.position, transform.rotation);
+            Rigidbody rb = projectile.GetComponent<Rigidbody>();
+
+            Vector3 projVel = transform.forward * throwforce;
+            Vector3 inheritVel = Vector3.Project(controller.velocity, transform.forward);
+            rb.AddForce(projVel + inheritVel, ForceMode.Impulse);
+
+            timer = 0f;
+            StartCoroutine(DestroyProjectile(projectile));
+        }
+    }
+
+    public IEnumerator DestroyProjectile(GameObject projectile)
+    {
+        yield return new WaitForSeconds(SnowballLifeSpan);
+        if (projectile != null)
+            Destroy(projectile);
     }
 }
