@@ -10,18 +10,13 @@ public class RoomManager : MonoBehaviour
     public GameObject westDoor;
     public GameObject eastDoor;
 
-    public int gridPosX = 0;
-    public int gridPosY = 0;
-
     GameObject nextRoom;
     public Vector3 newRoomSpawnPos;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
 
     public void CheckRoomConnections()
     {
         for (int i = 0; i < doors.Length; i++)
         {
-            int doorIndex = i;
             GameObject door = doors[i];
             newRoomSpawnPos = door.transform.position - (door.transform.TransformDirection(Vector3.forward) * 30);
             nextRoom = CheckIfRoomExists(newRoomSpawnPos, doors[i]);
@@ -30,33 +25,6 @@ public class RoomManager : MonoBehaviour
                 door.GetComponent<Door>().neighboringRoom = nextRoom;
             }
         }
-    }
-
-    public void UpdateGridPos(int _previousRoomXPos, int _previousRoomYPos, DoorDirection _directionEnteredFrom)
-    {
-        switch (_directionEnteredFrom)
-        {
-            case DoorDirection.North:
-                gridPosX = _previousRoomXPos;
-                gridPosY = _previousRoomYPos + 1;
-                break;
-
-            case DoorDirection.South:
-                gridPosX = _previousRoomXPos;
-                gridPosY = _previousRoomYPos - 1;
-                break;
-
-            case DoorDirection.West:
-                gridPosX = _previousRoomXPos - 1;
-                gridPosY = _previousRoomYPos;
-                break;
-
-            case DoorDirection.East:
-                gridPosX = _previousRoomXPos + 1;
-                gridPosY = _previousRoomYPos;
-                break;
-        }
-        CheckRoomConnections();
     }
 
     GameObject CheckIfRoomExists(Vector3 _posToCheck, GameObject _doorToCheck)
@@ -70,7 +38,7 @@ public class RoomManager : MonoBehaviour
             if (hit.collider != null)
             {
                 nextRoom = hit.collider.gameObject.transform.parent.gameObject; //Gets the entire room, not just an object in it
-                _doorToCheck.GetComponent<Door>().doesNextRoomExist = true;
+                _doorToCheck.GetComponent<Door>().neighboringRoom = nextRoom;
             }
         }
         return nextRoom;
@@ -79,7 +47,7 @@ public class RoomManager : MonoBehaviour
     public void CheckIfDoorIsInvalid(GameObject _nextRoomInstance, GameObject _doorToCheck)
     {
         Door doorScript = _doorToCheck.GetComponent<Door>();
-        if (doorScript.doesNextRoomExist == false)
+        if (doorScript.neighboringRoom == null)
         {
             return;
         }

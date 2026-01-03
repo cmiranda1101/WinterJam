@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Collections.Generic;
 
 public enum DoorDirection
 {
@@ -15,41 +14,32 @@ public class Door : MonoBehaviour
 
     GameObject levelGenerator;
     LevelGenerator levelGeneratorScript;
-    GameObject room;
-    GameObject roomManager;
-    RoomManager roomManagerScript;
     GameObject player;
     CharacterController playerCharacterController;
 
 
     public bool isDoorInvalid = false;
     public bool isDoorEssential = false;
-    public bool doesNextRoomExist = false;
     public GameObject neighboringRoom;
-    int enemiesAlive;
     Vector3 newRoomSpawnPos;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         levelGenerator = GameObject.FindGameObjectWithTag("LevelGenerator");
         levelGeneratorScript = levelGenerator.GetComponent<LevelGenerator>();
-        room = transform.parent.transform.parent.gameObject;
-        roomManager = room.transform.GetChild(0).gameObject; //Make sure the room manager is always the first child of the room
-        roomManagerScript = roomManager.GetComponent<RoomManager>();
         player = GameObject.FindGameObjectWithTag("Player");
         playerCharacterController = player.GetComponent<CharacterController>();
     }
 
     void GoToNextRoom()
     {
-        if (!doesNextRoomExist)
+        if (neighboringRoom == null)
         {
             if (levelGeneratorScript.numberOfRoomsToGenerate > 0)
             {
                 newRoomSpawnPos = transform.position - (gameObject.transform.forward * 30);
                 newRoomSpawnPos.y = 0;
-                levelGeneratorScript.GenerateRoom(newRoomSpawnPos, direction);
-                doesNextRoomExist = true;
+                neighboringRoom = levelGeneratorScript.GenerateRoom(newRoomSpawnPos, direction);
                 TeleportPlayerToRoom();
             }
         }
@@ -62,8 +52,9 @@ public class Door : MonoBehaviour
     void TeleportPlayerToRoom()
     {
         playerCharacterController.enabled = false;
+        float playerY = player.transform.position.y; // makes sure the player isn't floating or sinks into the ground
         Vector3 newPlayerPos = transform.position - (transform.forward * 10);
-        newPlayerPos.y = 1;
+        newPlayerPos.y = playerY;
         player.transform.position = newPlayerPos;
         playerCharacterController.enabled = true;
     }
