@@ -1244,7 +1244,7 @@ Transform:
   m_GameObject: {fileID: 5191083252983211152}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -16.452126, y: 0.49999997, z: -21.151653}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1282,7 +1282,6 @@ MonoBehaviour:
   enemyAnimator: {fileID: 2520151867828938983}
   enemyWeapon: {fileID: 3938019520043845967}
   enemyEffect: {fileID: -445054487424132336}
-  enemyRegister: {fileID: -7930743720270111868}
   coverObjects: {fileID: 0}
   health: 1
 --- !u!114 &-5935059452167155821
@@ -1412,9 +1411,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
-  m_Height: 1
+  m_Height: 1.9982948
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.9283562, z: 0}
 --- !u!54 &-7175281494710148549
 Rigidbody:
   m_ObjectHideFlags: 0
