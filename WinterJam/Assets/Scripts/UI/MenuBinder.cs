@@ -6,6 +6,7 @@ public class MenuBinder : MonoBehaviour
     public Button resumeButton;
     public Button settingsButton;
     public Button controlsButton;
+    public Button creditsButton;
     public Button exitButton;
     public Slider musicSlider;
     public Slider sfxSlider;
@@ -17,6 +18,7 @@ public class MenuBinder : MonoBehaviour
         resumeButton.onClick.AddListener(() => GameManager.instance.buttonFunctions.onResume());
         settingsButton.onClick.AddListener(() => GameManager.instance.buttonFunctions.onSettings());
         controlsButton.onClick.AddListener(() => GameManager.instance.buttonFunctions.onControls());
+        creditsButton.onClick.AddListener(() => GameManager.instance.buttonFunctions.onCredits());
         exitButton.onClick.AddListener(() => GameManager.instance.buttonFunctions.onExit());
 
         musicSlider.onValueChanged.AddListener((float value) => GameManager.audioManager.SetMusicVolume(value));

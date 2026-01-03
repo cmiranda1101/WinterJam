@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     public GameObject pauseMenu;
     public GameObject SettingsMenu;
     public GameObject ControlsMenu;
+    public GameObject CreditsMenu;
     public ButtonFunctions buttonFunctions;
     public Image playerHealth;
     public Image playerStamina;

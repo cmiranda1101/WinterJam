@@ -37,6 +37,13 @@ public class ButtonFunctions : MonoBehaviour
         GameManager.instance.menueQueue.Peek().SetActive(true);
     }
 
+    public void onCredits()
+    {
+        GameManager.instance.menueQueue.Peek().SetActive(false);
+        GameManager.instance.menueQueue.Push(GameManager.instance.CreditsMenu);
+        GameManager.instance.menueQueue.Peek().SetActive(true);
+    }
+
     public void onExit()
     {
 #if UNITY_EDITOR
