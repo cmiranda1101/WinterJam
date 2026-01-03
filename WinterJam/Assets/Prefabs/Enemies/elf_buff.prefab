@@ -1221,6 +1221,7 @@ GameObject:
   - component: {fileID: -5935059452167155821}
   - component: {fileID: 3938019520043845967}
   - component: {fileID: 2520151867828938983}
+  - component: {fileID: -7930743720270111868}
   - component: {fileID: -445054487424132336}
   - component: {fileID: 9023220854141266364}
   - component: {fileID: 76073122643801604}
@@ -1281,6 +1282,7 @@ MonoBehaviour:
   enemyAnimator: {fileID: 2520151867828938983}
   enemyWeapon: {fileID: 3938019520043845967}
   enemyEffect: {fileID: -445054487424132336}
+  enemyRegister: {fileID: -7930743720270111868}
   coverObjects: {fileID: 0}
   health: 1
 --- !u!114 &-5935059452167155821
@@ -1331,6 +1333,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyAnimator
   animator: {fileID: -4105845942546143372}
   navMeshAgent: {fileID: -9198854526307422410}
+--- !u!114 &-7930743720270111868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5191083252983211152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 027b4bf36287e044a98a70d8c9ac7d48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyRegister
+  roomManager: {fileID: 0}
 --- !u!114 &-445054487424132336
 MonoBehaviour:
   m_ObjectHideFlags: 0

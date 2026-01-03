@@ -6,20 +6,12 @@ public class AIRoomManager : MonoBehaviour
 {
     [SerializeField] BoxCollider roomCollider;
 
-    List<GameObject> enemiesInRoom;
+    public List<GameObject> enemiesInRoom;
     void Start()
     {
         enemiesInRoom = new List<GameObject>();
         
         roomCollider.enabled = true;
-
-        foreach (Transform child in transform)
-        {
-            if (child.CompareTag("Enemy"))
-            {
-                enemiesInRoom.Add(child.gameObject);
-            }
-        }
     }
 
     void OnTriggerEnter(Collider other)
